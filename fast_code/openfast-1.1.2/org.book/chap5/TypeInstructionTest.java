@@ -25,7 +25,6 @@ import org.openfast.*;
 import org.openfast.template.type.codec.*;
 import junit.framework.TestCase;
 
-
 public class TypeInstructionTest extends TestCase {
 
 	public void testInteger() {
@@ -33,6 +32,77 @@ public class TypeInstructionTest extends TestCase {
 		byte[] encoding = TypeCodec.NULLABLE_INTEGER.encode(value);
 		String res = ByteUtil.convertByteArrayToBitString(encoding);
 		assertEquals("00000111 11101001", res);
+	}
+
+	public void testNULLInteger() {
+		ScalarValue value = ScalarValue.NULL;
+		byte[] encoding = TypeCodec.NULLABLE_INTEGER.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10000000", res);
+	}
+
+	public void testNULLAscii() {
+		ScalarValue value = ScalarValue.NULL;
+		byte[] encoding = TypeCodec.NULLABLE_ASCII.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10000000", res);
+	}
+
+	public void testEmptyAscii() {
+		ScalarValue value = new StringValue("");
+		byte[] encoding = TypeCodec.NULLABLE_ASCII.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("00000000 10000000", res);
+	}
+
+	public void testZeroAscii() {
+		ScalarValue value = new StringValue("\0");
+		byte[] encoding = TypeCodec.NULLABLE_ASCII.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("00000000 00000000 10000000", res);
+	}
+
+	public void testVector() {
+		ScalarValue value = new ByteVectorValue("abc".getBytes());
+		byte[] encoding = TypeCodec.NULLABLE_BYTE_VECTOR_TYPE.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10000100 01100001 01100010 01100011", res);
+	}
+
+	public void testEmptyVector() {
+		ScalarValue value = new ByteVectorValue("".getBytes());
+		byte[] encoding = TypeCodec.NULLABLE_BYTE_VECTOR_TYPE.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10000001", res);
+	}
+
+	public void testNULLVector() {
+		ScalarValue value = ScalarValue.NULL;
+		byte[] encoding = TypeCodec.NULLABLE_BYTE_VECTOR_TYPE.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10000000", res);
+	}
+
+	public void testUnicodeStrEncodeDecode() {
+		ScalarValue value = new StringValue("½»Ò×Ëù");
+		byte[] encoding = TypeCodec.NULLABLE_UNICODE.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10001010 11100100 10111010 10100100 11100110 10011000 " + "10010011 ¡°1100110 10001001 10000000",
+				res);
+	}
+
+	public void testDecimal() {
+		ScalarValue value = new DecimalValue(1024000);
+		byte[] encoding = TypeCodec.NULLABLE_SF_SCALED_NUMBER.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10000100 00001000 10000000", res);
+	}
+
+	public void testNULLDecimal() {
+		ScalarValue value = ScalarValue.NULL;
+		byte[] encoding = TypeCodec.NULLABLE_SF_SCALED_NUMBER.encode(value);
+		String res = ByteUtil.convertByteArrayToBitString(encoding);
+		assertEquals("10000000", res);
 	}
 
 }
