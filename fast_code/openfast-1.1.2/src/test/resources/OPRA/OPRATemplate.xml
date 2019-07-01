@@ -1,0 +1,170 @@
+<templates xmlns="http://www.fixprotocol.org/ns/template-definition"
+    ns="http://www.fixprotocol.org/ns/templates/sample">
+    <template name="OPRA">
+        <typeRef name="OPRAFast" />
+        <uInt32 name="MESSAGE_CATEGORY">
+            <copy />
+        </uInt32>
+        <uInt32 name="MESSAGE_TYPE">
+            <copy />
+        </uInt32>
+        <uInt32 name="PARTICIPANT_ID">
+            <copy />
+        </uInt32>
+        <uInt32 name="RETRANSMISSION_REQUESTER" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="MESSAGE_SEQUENCE_NUMBER">
+            <increment />
+        </uInt32>
+        <uInt32 name="TIME">
+            <copy />
+        </uInt32>
+        <string name="SECURITY_SYMBOL" presence="optional">
+            <copy />
+        </string>
+        <uInt32 name="EXPIRATION_DATE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="YEAR" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="STRIKE_PRICE_CODE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="STRIKE_PRICE_DENOMINATOR_CODE"
+            presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="EXPLICIT_STRIKE_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="PREMIUM_PRICE_DENOMINATOR_CODE"
+            presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BID_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BID_SIZE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="OFFER_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="OFFER_SIZE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="SESSION_INDICATOR" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BBO_INDICATOR" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_BID_PARTICIPANT_ID" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_BID_PRICE_DENOMINATOR_CODE"
+            presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_BID_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_BID_SIZE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_OFFER_PARTICIPANT_ID" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_OFFER_PRICE_DENOMINATOR_CODE"
+            presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_OFFER_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="BEST_OFFER_SIZE" presence="optional">
+            <copy />
+        </uInt32>
+        <string name="RESERVED_FIELD_1" presence="optional">
+            <copy />
+        </string>
+        <string name="RESERVED_FIELD_2" presence="optional">
+            <copy />
+        </string>
+        <string name="RESERVED_FIELD_3" presence="optional">
+            <copy />
+        </string>
+        <uInt32 name="OPEN_INT_VOLUME" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="VOLUME" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="PREMIUM_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="OPEN_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="HIGH_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="LOW_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="LAST_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="NET_CHANGE_INDICATOR" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="NET_CHANGE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="UNDERLYING_PRICE_DENOM" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="UNDERLYING_STOCK_PRICE" presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="NUMBER_OF_INDICES_IN_GROUP" presence="optional">
+            <copy />
+        </uInt32>
+        <string name="INDEX_SYMBOL" presence="optional">
+            <copy />
+        </string>
+        <string name="INDEX_VALUE" presence="optional">
+            <copy />
+        </string>
+        <string name="BID_INDEX_VALUE" presence="optional">
+            <copy />
+        </string>
+        <string name="OFFER_INDEX_VALUE" presence="optional">
+            <copy />
+        </string>
+        <uInt32 name="NUMBER_OF_FOREIGN_CURRENCY_SPOT_VALUES_IN_GROUP"
+            presence="optional">
+            <copy />
+        </uInt32>
+        <string name="FCO_SYMBOL" presence="optional">
+            <copy />
+        </string>
+        <uInt32 name="DECIMAL_PLACEMENT_INDICATOR"
+            presence="optional">
+            <copy />
+        </uInt32>
+        <uInt32 name="FOREIGN_CURRENCY_SPOT_VALUE"
+            presence="optional">
+            <copy />
+        </uInt32>
+        <string name="TEXT" presence="optional">
+            <copy />
+        </string>
+        <string name="DEF_MSG" presence="optional">
+            <copy />
+        </string>
+    </template>
+</templates>
+

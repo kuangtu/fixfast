@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="OpenFAST">
+  <bannerLeft>
+    <name>OpenFAST</name>
+    <src>images/openfast-logo.png</src>
+    <href>http://www.openfast.org/</href>
+  </bannerLeft>
+  <body>
+	<head>
+	  <meta name="keywords" content="openfast, open fast, fast 1.1, fix, fpl, fix adapted for streaming, lasalletech, lasalle technology group"/>
+	</head>
+    <links>
+      <item name="OpenFAST @ SourceForge" href="https://sourceforge.net/projects/openfast" />
+      <item name="FAST Interoperability Portal" href="http://technical-fixprotocol.net/fast-portal/" />
+      <item name="FPL FAST" href="http://www.fixprotocol.org/fast" />
+      <item name="FAST Forum" href="http://fixprotocol.org/discuss/46/all" />
+      <item name="Lasalletech" href="http://www.lasalletech.com"/>
+    </links>
+
+    <menu name="OpenFAST">
+      <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=198357&amp;package_id=240515"/>
+      <item name="License" href="license.html"/>
+    </menu>
+    
+    <menu name="About OpenFAST">
+      <item name="About" href="index.html"/>
+      <item name="FAQ" href="faq.html"/>
+    </menu>
+    
+    <menu name="Documentation">
+      <item name="Javadocs" href="apidocs/"/>
+      <item name="15-minute Guide" href="http://www.quickfixj.org/confluence/display/FAST/FifteenMinuteGettingStarted"/>
+      <item name="Wiki" href="http://www.quickfixj.org/confluence/display/FAST/Home"/>
+    </menu>
+    
+    <menu name="Developers">
+      <item name="How to Contribute" href="contributions.html"/>
+      <item name="Getting Help" href="support.html"/>
+    </menu>
+
+    <menu ref="reports"/>
+  </body>
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-stylus-skin</artifactId>
+    <version>1.0.1</version>
+  </skin>
+  <poweredBy>
+  	<logo name="SourceForge" href="http://sourceforge.net" img="http://sflogo.sourceforge.net/sflogo.php?group_id=198357&amp;type=1"/>
+  	<logo name="Maven" href="http://maven.apache.org/" img="images/logos/build-by-maven-white.png"/>
+  </poweredBy>
+</project>

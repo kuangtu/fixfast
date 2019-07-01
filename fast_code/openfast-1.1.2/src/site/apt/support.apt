@@ -1,0 +1,27 @@
+                                    ------
+                                    Support
+                                    ------
+                                    Jacob Northey
+                                    ------
+                                    2008. 07. 09.
+
+Getting Help
+
+
+* Support using OpenFAST
+
+      * Read the {{{faq.html}FAQ}}
+
+      * Subscribe to {{{mail-lists.html}openfast-user@list.sourceforge.net}} and submit a message
+      
+* Submitting Bugs/Feature Requests
+
+      * {{{http://www.quickfixj.org/jira/browse/FAST}Jira}} is currently being used to track issues
+
+* General help with the FAST Protocol
+
+      * Visit the FAST Protocol discussion forum: {{http://fixprotocol.org/discuss/46/all}}
+
+* OpenFAST Consulting
+
+      * {{{http://www.lasalletech.com/openfast.html}Lasalletech}} - Originators of OpenFAST can provide support contracts and consulting services.

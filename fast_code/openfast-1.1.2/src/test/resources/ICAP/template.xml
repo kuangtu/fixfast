@@ -1,0 +1,60 @@
+<template name="Security List" id="17">
+    <string name="BeginString" presence="mandatory" id="8">
+      <constant value="FIX.4.4"/>
+    </string>
+    <string name="MsgType" presence="mandatory" id="35">
+      <constant value="y"/>
+    </string>
+    <string name="SenderCompID" presence="mandatory" id="49">
+      <copy/>
+    </string>
+    <string name="TargetCompID" presence="mandatory" id="56">
+      <copy/>
+    </string>
+    <int32 name="MsgSeqNum" presence="mandatory" id="34"/>
+    <string name="SendingTime" presence="mandatory" id="52"/>
+    <string name="SecurityReqID" presence="mandatory" id="320"/>
+    <string name="SecurityResponseID" presence="mandatory" id="322"/>
+    <int32 name="SecurityRequestResult" presence="mandatory" id="560"/>
+    <string name="LastFragment" presence="mandatory" id="893"/>
+    <sequence name="RelatedSymbols" presence="mandatory">
+      <length name="NoRelatedSym" id="146"/>
+      <string name="Symbol" presence="mandatory" id="55"/>
+      <string name="SecurityID" presence="optional" id="48"/>
+      <string name="SecurityIDSource" presence="optional" id="22"/>
+      <sequence name="SecAltID" presence="mandatory">
+        <length name="NoSecurityAltID" id="454"/>
+        <string name="SecurityAltID" presence="mandatory" id="455"/>
+        <string name="SecurityAltIDSource" presence="mandatory" id="456">
+          <constant value="ICAP"/>
+        </string>
+      </sequence>
+      <int32 name="Product" presence="optional" id="460">
+        <default value="2"/>
+      </int32>
+      <string name="MaturityDate" presence="optional" id="541"/>
+      <decimal name="CouponRate" presence="optional" id="223">
+        <copy/>
+      </decimal>
+      <string name="SecurityExchange" presence="optional" id="207">
+        <copy/>
+      </string>
+      <string name="SecurityDesc" presence="optional" id="107"/>
+      <int32 name="MinTradeVol" presence="optional" id="562"/>
+      <decimal name="IncrementalAmt" presence="optional" id="20020"/>
+      <string name="Tradable" presence="optional" id="20021"/>
+      <int32 name="InternalInstType" presence="optional" id="20017"/>
+      <string name="Issuer" presence="optional" id="106"/>
+      <int32 name="OptionType" presence="optional" id="20023"/>
+      <string name="Region" presence="optional" id="20019"/>
+      <string name="DeliveryStartDate" presence="optional" id="20005"/>
+      <string name="DeliveryEndDate" presence="optional" id="20006"/>
+      <decimal name="StrikePrice" presence="optional" id="202"/>
+      <int32 name="DeliveryUnit" presence="optional" id="20012"/>
+      <sequence name="Legs" presence="optional">
+        <length name="NoLegs" id="555"/>
+        <string name="LegSymbol" presence="optional" id="600"/>
+        <int32 name="LegProduct" presence="optional" id="607"/>
+      </sequence>
+    </sequence>
+</template>

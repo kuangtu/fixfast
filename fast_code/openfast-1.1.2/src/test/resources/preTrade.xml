@@ -1,0 +1,11 @@
+<templates templateNs="http://www.openfast.org/fix44/preTrade" ns="http://www.openfast.org/fix44">
+	<template name="Quote" id="S">
+		<ascii name="QuoteID" id="117"><delta/></ascii>
+		<templateRef name="Instrument" templateNs="http://www.openfast.org/fix44/components"/>
+		<decimal name="BidPx" id="132"><delta/></decimal>
+		<int32 name="BidSize" id="134"><delta/></int32>
+		<decimal name="OfferPx" id="133"><delta/></decimal>
+		<int32 name="OfferSize" id="135"><delta/></int32>
+		<ascii name="Group" ns="http://www.openfast.org/ext"><copy/></ascii>
+	</template>
+</templates>

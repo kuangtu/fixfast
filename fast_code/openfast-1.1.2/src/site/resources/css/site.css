@@ -1,0 +1,53 @@
+a.side:link {color:#646464; text-decoration:none;}
+a.side:visited {color:#646464; text-decoration:none;}
+a.side:hover {color:#646464; text-decoration:underline;}
+
+body {
+	margin-left: 0px;
+	background-color: #EBEBEB;
+}
+#downloadbox {
+  float: right;
+  margin: 1em 0em 2em 1em;
+  padding: 1em;
+  border: 1px solid #999;
+  background-color: #fff;
+}
+
+#downloadbox h5 {
+  color: #000;
+  margin: 0;
+  border-bottom: 1px solid #aaaaaa;
+  font-size: smaller;
+  padding: 0;
+}
+
+#downloadbox p {
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+#downloadbox p a {
+    color: #47a;
+    font-weight: inherit;   
+}
+
+#downloadbox ul {
+  margin-top: 0;
+  margin-bottom: 1em;
+  list-style-type: disc;
+}
+
+#downloadbox li {
+  font-size: smaller;
+}
+
+#banner {
+	background: transparent url(../images/spacer.gif) repeat scroll 0%;
+	height: 100px;
+	background-color: #fff;
+}
+
+#navcolumn h5 {
+	background-image: url(../images/h5.gif);
+}

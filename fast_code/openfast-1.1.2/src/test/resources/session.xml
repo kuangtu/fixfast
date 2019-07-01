@@ -1,0 +1,11 @@
+<templates 
+	templateNs="http://www.openfast.org/fix44/session" 
+	ns="http://www.openfast.org/fix44"
+	xmlns="http://www.fixprotocol.org/ns/fast/td/1.1" 
+	xmlns:scp="http://www.fixprotocol.org/ns/fast/scp/1.1">
+	<template name="Logon" scp:reset="yes">
+		<ascii name="MsgType" id="35"><constant value="A"/></ascii>
+		<int32 name="EncryptMethod" id="98"><constant value="0"/></int32>
+		<int32 name="HeartBtInt" id="108"/>
+	</template>
+</templates>

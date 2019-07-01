@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faqs title="Frequently Asked Questions" toplink="false">
+
+  <part id="background">
+    <title>Background</title>
+	<faq id="fast-what">
+		<question>What is the FAST Protocol?</question>
+		<answer>
+		  OpenFAST is a 100% Java implementation of the FAST Protocol (FIX Adapted for STreaming). The FAST protocol is used to optimize communications in the electronic exchange of financial data. OpenFAST is flexible and extensible through high volume - low latency transmissions.
+
+		  The FAST protocol uses a data compression algorithm to decrease the size of data by two processes.
+          <ul>
+    		<li><em>First Process: Field Encoding</em> - Data the is simliar or redundant is removed.</li>
+    		<li><em>Second Process: Transfer Encoding</em> - Serialize remaining data through binary encoded.</li>
+          </ul>
+		  The FAST protocol also uses templates to enhance data compression and decompression. The only specification among the templates is that the creator and end-user must agree upon a template before data can be streamed. Any template guide may be used, such as XML or a basic text file. 
+		</answer>
+	</faq>
+	<faq id="fix-what">
+		<question>What is FIX?</question>
+		<answer>
+		  Visit <a href="http://www.fixprotocol.org/what-is-fix.shtml">http://www.fixprotocol.org/what-is-fix.shtml</a> for a complete rundown of the FIX Protocol.
+		</answer>
+	</faq>
+    <faq id="speed">
+      <question>
+        Why create an implementation of a latency/throughput-reducing specification and not optimize it for speed?
+      </question>
+      <answer>
+        One of the main goals of OpenFAST is to provide an open implementation of fast that is easy to understand. 
+        Optimizations will be made where it does not compromise the readability or architecture of the API.
+      </answer>
+    </faq>
+  </part>
+  
+  <part id="development">
+  	<title>Development</title>
+
+	<faq id="fix-over-fast">
+		<question>How do I send FIX messages through OpenFAST?</question>
+		<answer>
+		  OpenFAST is implemented using a generic messaging model.  There aren't any specific message protocols currently
+		  built-in.  There is a tentative plan to create an extensions module for OpenFAST that will support different 
+		  messaging protocols with at least support for FIX.  Keep checking back for more information. 
+		</answer>
+	</faq>
+
+	<faq id="security">
+		<question>Is there support for security in OpenFAST?</question>
+		<answer>
+		  SCP 1.0 and SCP 1.1 have been implemented.   There aren't any security mechanisms currently defined in either
+		  session protocol.  If you are having trouble integrating security with OpenFAST, feel free to contact us at 
+		  <a href="mailto:support@openfast.org">support@openfast.org</a>.
+		</answer>
+	</faq>
+  </part>
+
+</faqs>

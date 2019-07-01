@@ -1,0 +1,21 @@
+<assembly>
+    <id>src</id>
+    <formats>
+        <format>zip</format>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory/>
+            <outputDirectory/>
+            <excludes>
+                <exclude>**/.svn/*</exclude>
+                <exclude>.classpath</exclude>
+                <exclude>.settings/**</exclude>
+                <exclude>.project</exclude>
+                <exclude>target/**</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+</assembly>

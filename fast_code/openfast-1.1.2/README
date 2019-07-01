@@ -1,0 +1,38 @@
+Building
+========
+  OpenFAST uses the Maven2 build tool. Downloaded the latest version of Maven2 from http://maven.apache.org.
+
+  To build OpenFAST using maven, enter from a command line:
+  > mvn package
+
+Eclipse
+=======  
+  To generate Eclipse .project and .classpath files so that OpenFAST can be imported into Eclipse:
+  > mvn eclipse:eclipse
+
+Deploying
+=========
+  To deploy to the OpenFAST maven repository complete the following steps:
+  1. Contact project administrators to get shell access to the OpenFAST
+  2. Add the following configuration to the M2 settings.xml file where [USERNAME] is an authorized user from step 1.
+    <server>
+      <id>sourceforge.net</id>
+      <username>[USERNAME],openfast</username>
+      <filePermissions>664</filePermissions>
+      <directoryPermissions>775</directoryPermissions>
+	  <password>[PASSWORD]</password>
+    </server>
+
+  SourceForge has new restricted shell access.  To release or deploy OpenFAST, use the following steps:
+  For more information see http://maven.apache.org/plugins/maven-site-plugin-3.0-beta-3/examples/site-deploy-to-sourceforge.net.html
+   1. ssh -t jacob_northey@shell.sourceforge.net create
+   2. mvn deploy
+   
+Releasing
+=========
+  1. Check that you can successfully deploy OpenFAST by following the steps in the [Deploying] section.
+  2. Make sure all local changes are checked in.
+  3. Run the release:prepare goal and follow the steps to set the release version.
+  > mvn release:prepare
+  4. Run the release:perform goal to finalize the release.
+  5. Check http://www.openfast.org to verify that the new version information is on the website.

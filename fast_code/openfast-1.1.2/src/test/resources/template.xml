@@ -1,0 +1,12 @@
+<templates xmlns="http://www.fixprotocol.org/ns/template-definition"
+	ns="http://www.fixprotocol.org/ns/templates/sample">
+	<template name="person">
+		<u32 name="id"><increment/></u32>
+		<string name="name"><copy/></string>
+		<string name="phoneNumber"><delta/></string>
+		<sequence name="contacts">
+			<length name="numContacts"/>
+			<u32 name="id"><delta/></u32>
+		</sequence>
+	</template>
+</templates>

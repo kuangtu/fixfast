@@ -1,0 +1,239 @@
+<templates xmlns:scp="http://www.fixprotocol.org/ns/fast/scp/1.1" xmlns="http://www.fixprotocol.org/ns/fast/td/1.1" templateNs="http://www.fixprotocol.org/ns/fast/scp/1.1" ns="http://www.fixprotocol.org/ns/fast/scp/1.1">
+
+  <template name="Hello" scp:reset="yes" id="16002">
+    <typeRef name="Hello"/>
+    <string name="SenderName"/>
+    <string name="VendorId" presence="optional"/>
+  </template>
+
+  <template name="Alert" id="16003">
+    <typeRef name="Alert"/>
+    <uInt32 name="Severity"/>
+    <uInt32 name="Code"/>
+    <uInt32 name="Value" presence="optional"/>
+    <string name="Description" presence="optional"/>
+  </template>
+
+  <template name="Reset" scp:reset="yes" id="120"> <typeRef name="Reset"/> </template>
+
+  <template name="NsName">
+    <string name="Ns" charset="unicode"> <copy/> </string>
+    <string name="Name" charset="unicode"/>
+  </template>
+
+  <template name="TemplateName">
+    <string name="Ns" charset="unicode"> <copy dictionary="template"/> </string>
+    <string name="Name" charset="unicode"/>
+  </template>
+
+  <template name="TypeRef">
+    <group name="TypeRef" presence="optional">
+      <templateRef name="NsName"/>
+      <templateRef name="Other"/>
+    </group>
+  </template>
+
+  <template name="TemplateDecl" id="16010">
+    <typeRef name="TemplateDecl"/>
+    <templateRef name="TemplateName"/>
+    <uInt32 name="TemplateId"/>
+  </template>
+
+  <template name="TemplateDef" id="16011">
+    <typeRef name="TemplateDef"/>
+    <templateRef name="TemplateName"/>
+    <string name="AuxId" charset="unicode" presence="optional"/>
+    <uInt32 name="TemplateId" presence="optional"/>
+    <templateRef name="TypeRef"/>
+    <uInt32 name="Reset"/>
+    <templateRef name="Other"/>
+    <sequence name="Instructions"> <templateRef/> </sequence>
+  </template>
+
+  <template name="NsNameWithAuxId">
+    <templateRef name="NsName"/>
+    <string name="AuxId" charset="unicode" presence="optional"/>
+  </template>
+
+  <template name="FieldBase">
+    <templateRef name="NsNameWithAuxId"/>
+    <uInt32 name="Optional"/>
+    <templateRef name="Other"/>
+  </template>
+
+  <template name="PrimFieldBase">
+    <templateRef name="FieldBase"/>
+    <group name="Operator" presence="optional"> <templateRef/> </group>
+  </template>
+
+  <template name="LengthPreamble">
+    <templateRef name="NsNameWithAuxId"/>
+    <templateRef name="Other"/>
+  </template>
+
+  <template name="PrimFieldBaseWithLength">
+    <templateRef name="PrimFieldBase"/>
+    <group name="Length" presence="optional"> <templateRef name="LengthPreamble"/> </group>
+  </template>
+
+  <template name="Int32Instr" id="16012">
+    <typeRef name="Int32Instr"/>
+    <templateRef name="PrimFieldBase"/>
+    <int32 name="InitialValue" presence="optional"/>
+  </template>
+
+  <template name="UInt32Instr" id="16013">
+    <typeRef name="UInt32Instr"/>
+    <templateRef name="PrimFieldBase"/>
+    <uInt32 name="InitialValue" presence="optional"/>
+  </template>
+
+  <template name="Int64Instr" id="16014">
+    <typeRef name="Int64Instr"/>
+    <templateRef name="PrimFieldBase"/>
+    <int64 name="InitialValue" presence="optional"/>
+  </template>
+
+  <template name="UInt64Instr" id="16015">
+    <typeRef name="UInt64Instr"/>
+    <templateRef name="PrimFieldBase"/>
+    <uInt64 name="InitialValue" presence="optional"/>
+  </template>
+
+  <template name="DecimalInstr" id="16016">
+    <typeRef name="DecimalInstr"/>
+    <templateRef name="PrimFieldBase"/>
+    <decimal name="InitialValue" presence="optional"/>
+  </template>
+
+  <template name="CompositeDecimalInstr" id="16017">
+    <typeRef name="CompositeDecimalInstr"/>
+    <templateRef name="FieldBase"/>
+    <group name="Exponent" presence="optional">
+      <group name="Operator"> <templateRef/> </group>
+      <int32 name="InitialValue" presence="optional"/>
+      <templateRef name="Other"/>
+    </group>
+    <group name="Mantissa" presence="optional">
+      <group name="Operator"> <templateRef/> </group>
+      <int64 name="InitialValue" presence="optional"/>
+      <templateRef name="Other"/>
+    </group>
+  </template>
+
+  <template name="AsciiStringInstr" id="16018">
+    <typeRef name="AsciiStringInstr"/>
+    <templateRef name="PrimFieldBase"/>
+    <string name="InitialValue" presence="optional"/>
+  </template>
+
+  <template name="UnicodeStringInstr" id="16019">
+    <typeRef name="UnicodeStringInstr"/>
+    <templateRef name="PrimFieldBaseWithLength"/>
+    <string name="InitialValue" presence="optional" charset="unicode"/>
+  </template>
+
+  <template name="ByteVectorInstr" id="16020">
+    <typeRef name="ByteVectorInstr"/>
+    <templateRef name="PrimFieldBaseWithLength"/>
+    <byteVector name="InitialValue" presence="optional"/>
+  </template>
+
+  <template name="StaticTemplateRefInstr" id="16021">
+    <typeRef name="StaticTemplateRefInstr"/>
+    <templateRef name="TemplateName"/>
+    <templateRef name="Other"/>
+  </template>
+
+  <template name="DynamicTemplateRefInstr" id="16022">
+    <typeRef name="DynamicTemplateRefInstr"/>
+    <templateRef name="Other"/>
+  </template>
+
+  <template name="SequenceInstr" id="16023">
+    <typeRef name="SequenceInstr"/>
+    <templateRef name="FieldBase"/>
+    <templateRef name="TypeRef"/>
+    <group name="Length" presence="optional">
+      <group name="Name" presence="optional"> <templateRef name="NsNameWithAuxId"/> </group>
+      <group name="Operator" presence="optional"> <templateRef/> </group>
+      <uInt32 name="InitialValue" presence="optional"/>
+      <templateRef name="Other"/>
+    </group>
+    <sequence name="Instructions"> <templateRef/> </sequence>
+  </template>
+
+  <template name="GroupInstr" id="16024">
+    <typeRef name="GroupInstr"/>
+    <templateRef name="FieldBase"/>
+    <templateRef name="TypeRef"/>
+    <sequence name="Instructions"> <templateRef/> </sequence>
+  </template>
+
+  <template name="OpBase">
+    <string name="Dictionary" presence="optional" charset="unicode"/>
+    <group name="Key" presence="optional"> <templateRef name="NsName"/> </group>
+    <templateRef name="Other"/>
+  </template>
+
+  <template name="ConstantOp" id="16025">
+    <typeRef name="ConstantOp"/>
+    <templateRef name="Other"/>
+  </template>
+
+  <template name="DefaultOp" id="16026">
+    <typeRef name="DefaultOp"/>
+    <templateRef name="Other"/>
+  </template>
+
+  <template name="CopyOp" id="16027">
+    <typeRef name="CopyOp"/>
+    <templateRef name="OpBase"/>
+  </template>
+
+  <template name="IncrementOp" id="16028">
+    <typeRef name="IncrementOp"/>
+    <templateRef name="OpBase"/>
+  </template>
+
+  <template name="DeltaOp" id="16029">
+    <typeRef name="DeltaOp"/>
+    <templateRef name="OpBase"/>
+  </template>
+
+  <template name="TailOp" id="16030">
+    <typeRef name="TailOp"/>
+    <templateRef name="OpBase"/>
+  </template>
+
+  <template name="Other">
+    <group name="Other" presence="optional">
+      <sequence name="ForeignAttributes"> <templateRef name="Attribute"/> </sequence>
+      <sequence name="ForeignElements"> <templateRef name="Element"/> </sequence>
+    </group>
+  </template>
+
+  <template name="ForeignInstr" id="16031">
+    <typeRef name="ForeignInstr"/>
+    <templateRef name="Element"/>
+  </template>
+
+  <template name="Attribute">
+    <string name="Ns" charset="unicode"> <copy dictionary="template"/> </string>
+    <string name="Name" charset="unicode"/>
+    <string name="Value" charset="unicode"/>
+  </template>
+
+  <template name="Element" id="16032">
+    <typeRef name="Element"/>
+    <string name="Ns" charset="unicode"> <copy dictionary="template"/> </string>
+    <string name="Name" charset="unicode"/>
+    <sequence name="Attributes"> <templateRef name="Attribute"/> </sequence>
+    <sequence name="Content"> <templateRef/> </sequence>
+  </template>
+
+  <template name="Text" id="16033">
+    <typeRef name="Text"/>
+    <string name="Value" charset="unicode"/>
+  </template>
+</templates>

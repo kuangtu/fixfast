@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<document>
+	<properties>
+		<title>About</title>
+		<author>Jacob Northey</author>
+	</properties>
+	
+	<body>
+		<div id="downloadbox">
+		  <h5>Download OpenFAST ${project.version}</h5>
+		  <p>
+		    <img valign="top" src="images/icon_arrowfolderopen2_sml.gif" border="0" alt="" title="download"/>
+		    <a href="http://sourceforge.net/project/showfiles.php?group_id=198357&amp;package_id=240515">
+		      Download ${project.version}
+		    </a>
+		  </p>
+		  <ul>
+		    <li>
+		      <a href="http://openfast.wiki.sourceforge.net/FifteenMinute">Getting Started</a>
+		    </li>
+		    <li>
+		      <a href="apidocs/">Javadocs</a>
+		    </li>
+		    <li>
+		      <a href="license.html">License</a>
+		    </li>
+		  </ul>
+		</div>
+		<section name="OpenFAST">
+			<subsection name="Implementation Details">
+			   <b>IMPORTANT:</b>
+			   <ul>
+			   <li>OpenFAST 1.1.1: the <a href="apidocs/org/openfast/MessageInputStream.html#readMessage()">MessageInputStream.readMessage()</a> method will throw a <a href="apidocs/org/openfast/error/FastException.html">FastException</a> when the end of the stream is encountered.</li>
+			   <li>OpenFAST 1.1.2:  the <a href="apidocs/org/openfast/MessageInputStream.html#readMessage()">MessageInputStream.readMessage()</a> method will throw a <a href="apidocs/org/openfast/error/FastException.html">FastException</a> when the end of the stream is encountered in the middle of decoding a message.  If the end of the stream is encountered immediately after reading a full message, null is returned.</li>
+			   </ul>
+			</subsection>
+			<subsection name="What is OpenFAST?">	
+				OpenFAST is a 100% Java implementation of the FAST Protocol (FIX Adapted for STreaming). 
+				The FAST protocol is used to optimize communications in the electronic exchange of financial data. 
+				OpenFAST is flexible and extensible through high volume - low latency transmissions.
+				The FAST protocol uses a data compression algorithm to decrease the size of data by two processes.
+				<ul>
+     			<li><em>First Process: Field Encoding</em> - Data that is simliar or redundant is removed.</li>
+			    <li><em>Second Process: Transfer Encoding</em> - Serialize remaining data through binary encoding.</li>
+			    </ul>
+    			The FAST protocol also uses templates to enhance data compression and decompression. The only specification 
+    			among the templates is that the creator and end-user must agree upon a template before data can be streamed. 
+    			Any template guide may be used, such as XML or a basic text file.
+			    To learn more about OpenFAST and the FAST protocol, visit the FAQ. 
+			</subsection>
+			<subsection name="Goals">
+				<ul>
+					<li>Provide a complete implementation of the current FAST Specification</li>
+					<li>Create an implementation that follows Object Oriented Design principles</li>
+					<li>Extensible so that new types, codecs, and operators can be created easily</li>
+				</ul>
+			</subsection>
+			<subsection name="Features">
+				<ul>
+					<li>100% Java Implementation of the FAST protocol - using the <a href="http://www.fixprotocol.org/fastspec">current 1.x.1 specification</a>.</li>
+					<li>Using a protocol that is market proven by: Archipelago Exchange, London Stock Exchange, CME, and others.</li>
+					<li>Easily creatable data template using existing specifications such as XML or develop your own.</li>
+					<li>SCP 1.0 implementation</li>
+					<li>SCP 1.1 implementation</li>
+					<li>Licensed under the <a href="http://www.mozilla.org/MPL/MPL-1.1.html">Mozilla Public License</a></li>
+				</ul>
+			</subsection>
+            <subsection name="Acknowledgments">
+                <h4>OpenFAST uses The YourKit Java Profiler for Performance Tuning</h4>
+                <p>YourKit is kindly supporting open source projects with its full-featured Java Profiler.
+                YourKit, LLC is the creator of innovative and intelligent tools for profiling
+                Java and .NET applications. Take a look at YourKit's leading software products:
+                <a href="http://www.yourkit.com/java/profiler/index.jsp">YourKit Java Profiler</a> and
+                <a href="http://www.yourkit.com/.net/profiler/index.jsp">YourKit .NET Profiler</a>.</p>
+            </subsection>
+		</section>
+	</body>
+</document>

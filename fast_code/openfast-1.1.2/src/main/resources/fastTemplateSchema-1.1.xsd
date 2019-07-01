@@ -1,0 +1,373 @@
+<xs:schema xmlns:td="http://www.fixprotocol.org/ns/fast/td/1.1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.fixprotocol.org/ns/fast/td/1.1">
+    <xs:element name="templates">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="td:template" />
+                <xs:group ref="td:other" />
+            </xs:choice>
+            <xs:attribute name="ns" />
+            <xs:attribute name="templateNs" />
+            <xs:attribute name="dictionary">
+                <xs:simpleType>
+                    <xs:union memberTypes="xs:string">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="template" />
+                                <xs:enumeration value="type" />
+                                <xs:enumeration value="global" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:union>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="template">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:choice>
+                    <xs:element ref="td:typeRef" />
+                    <xs:group ref="td:instruction" />
+                </xs:choice>
+                <xs:group ref="td:other" />
+            </xs:choice>
+            <xs:attributeGroup ref="td:templateNsName" />
+            <xs:attribute name="ns" />
+            <xs:attribute name="dictionary">
+                <xs:simpleType>
+                    <xs:union memberTypes="xs:string">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="template" />
+                                <xs:enumeration value="type" />
+                                <xs:enumeration value="global" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:union>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="typeRef">
+        <xs:complexType>
+            <xs:group ref="td:other" />
+            <xs:attributeGroup ref="td:nameAttr" />
+            <xs:attribute name="ns" />
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="instruction">
+        <xs:choice>
+            <xs:group ref="td:field" />
+            <xs:element ref="td:templateRef" />
+        </xs:choice>
+    </xs:group>
+    <xs:group name="fieldInstrContent">
+        <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:group ref="td:fieldOp" />
+                <xs:group ref="td:other" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:attributeGroup name="fieldInstrContent">
+        <xs:attributeGroup ref="td:nsName" />
+        <xs:attribute name="presence">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="mandatory" />
+                    <xs:enumeration value="optional" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attributeGroup ref="td:other" />
+    </xs:attributeGroup>
+    <xs:group name="field">
+        <xs:choice>
+            <xs:group ref="td:integerField" />
+            <xs:element ref="td:decimal" />
+            <xs:group ref="td:stringField" />
+            <xs:element ref="td:byteVector" />
+            <xs:element ref="td:sequence" />
+            <xs:element ref="td:group" />
+        </xs:choice>
+    </xs:group>
+    <xs:complexType name="integerField">
+        <xs:group ref="td:fieldInstrContent" />
+        <xs:attributeGroup ref="td:fieldInstrContent" />
+    </xs:complexType>
+    <xs:group name="integerField">
+        <xs:choice>
+            <xs:element ref="td:int32" />
+            <xs:element ref="td:uInt32" />
+            <xs:element ref="td:int64" />
+            <xs:element ref="td:uInt64" />
+        </xs:choice>
+    </xs:group>
+    <xs:element name="int32" type="td:integerField" />
+    <xs:element name="uInt32" type="td:integerField" />
+    <xs:element name="int64" type="td:integerField" />
+    <xs:element name="uInt64" type="td:integerField" />
+    <xs:element name="decimal">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:choice>
+                    <xs:group ref="td:fieldOp" />
+                    <xs:choice>
+                        <xs:element ref="td:exponent" />
+                        <xs:element ref="td:mantissa" />
+                    </xs:choice>
+                </xs:choice>
+                <xs:group ref="td:other" />
+            </xs:choice>
+            <xs:attributeGroup ref="td:nsName" />
+            <xs:attribute name="presence">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="mandatory" />
+                        <xs:enumeration value="optional" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="exponent">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:group ref="td:fieldOp" />
+                <xs:group ref="td:other" />
+            </xs:choice>
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="mantissa">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:group ref="td:fieldOp" />
+                <xs:group ref="td:other" />
+            </xs:choice>
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="stringField">
+        <xs:sequence>
+            <xs:element name="string">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group minOccurs="0"
+                            ref="td:byteVectorLength" />
+                        <xs:group ref="td:fieldInstrContent" />
+                    </xs:sequence>
+                    <xs:attributeGroup ref="td:fieldInstrContent" />
+                    <xs:attribute name="charset">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="ascii" />
+                                <xs:enumeration value="unicode" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="byteVector">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group minOccurs="0" ref="td:byteVectorLength" />
+                <xs:group ref="td:fieldInstrContent" />
+            </xs:sequence>
+            <xs:attributeGroup ref="td:fieldInstrContent" />
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="byteVectorLength">
+        <xs:sequence>
+            <xs:element name="length">
+                <xs:complexType>
+                    <xs:attributeGroup ref="td:nsName" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="sequence">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:choice>
+                    <xs:element ref="td:typeRef" />
+                    <xs:group ref="td:length" />
+                    <xs:group ref="td:instruction" />
+                </xs:choice>
+                <xs:group ref="td:other" />
+            </xs:choice>
+            <xs:attributeGroup ref="td:nsName" />
+            <xs:attribute name="presence">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="mandatory" />
+                        <xs:enumeration value="optional" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="dictionary">
+                <xs:simpleType>
+                    <xs:union memberTypes="xs:string">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="template" />
+                                <xs:enumeration value="type" />
+                                <xs:enumeration value="global" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:union>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="length">
+        <xs:sequence>
+            <xs:element name="length">
+                <xs:complexType>
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
+                        <xs:group ref="td:fieldOp" />
+                        <xs:group ref="td:other" />
+                    </xs:choice>
+                    <xs:attribute name="name" type="xs:token" />
+                    <xs:attribute name="ns" />
+                    <xs:attribute name="id" type="xs:token" />
+                    <xs:attributeGroup ref="td:other" />
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="group">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:choice>
+                    <xs:element ref="td:typeRef" />
+                    <xs:group ref="td:instruction" />
+                </xs:choice>
+                <xs:group ref="td:other" />
+            </xs:choice>
+            <xs:attributeGroup ref="td:nsName" />
+            <xs:attribute name="presence">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:enumeration value="mandatory" />
+                        <xs:enumeration value="optional" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="dictionary">
+                <xs:simpleType>
+                    <xs:union memberTypes="xs:string">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:token">
+                                <xs:enumeration value="template" />
+                                <xs:enumeration value="type" />
+                                <xs:enumeration value="global" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:union>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="fieldOp">
+        <xs:choice>
+            <xs:element ref="td:constant" />
+            <xs:element ref="td:default" />
+            <xs:element ref="td:copy" />
+            <xs:element ref="td:increment" />
+            <xs:element ref="td:delta" />
+            <xs:element ref="td:tail" />
+        </xs:choice>
+    </xs:group>
+    <xs:element name="constant">
+        <xs:complexType>
+            <xs:group ref="td:other" />
+            <xs:attributeGroup ref="td:initialValueAttr" />
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="default">
+        <xs:complexType>
+            <xs:group ref="td:other" />
+            <xs:attribute name="value" />
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="copy" type="td:opContext" />
+    <xs:element name="increment" type="td:opContext" />
+    <xs:element name="delta" type="td:opContext" />
+    <xs:element name="tail" type="td:opContext" />
+    <xs:attributeGroup name="initialValueAttr">
+        <xs:attribute use="required" name="value" />
+    </xs:attributeGroup>
+    <xs:complexType name="opContext">
+        <xs:group ref="td:other" />
+        <xs:attribute name="dictionary">
+            <xs:simpleType>
+                <xs:union memberTypes="xs:string">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:token">
+                            <xs:enumeration value="template" />
+                            <xs:enumeration value="type" />
+                            <xs:enumeration value="global" />
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:union>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="key" type="xs:token" />
+        <xs:attribute name="ns" />
+        <xs:attribute name="value" />
+        <xs:attributeGroup ref="td:other" />
+    </xs:complexType>
+    <xs:element name="templateRef">
+        <xs:complexType>
+            <xs:group ref="td:other" />
+            <xs:attribute name="name" type="xs:token" />
+            <xs:attribute name="templateNs" />
+            <xs:attributeGroup ref="td:other" />
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="nsName">
+        <xs:attributeGroup ref="td:nameAttr" />
+        <xs:attribute name="ns" />
+        <xs:attribute name="id" type="xs:token" />
+    </xs:attributeGroup>
+    <xs:attributeGroup name="templateNsName">
+        <xs:attributeGroup ref="td:nameAttr" />
+        <xs:attribute name="templateNs" />
+        <xs:attribute name="id" type="xs:token" />
+    </xs:attributeGroup>
+    <xs:attributeGroup name="nameAttr">
+        <xs:attribute use="required" name="name" type="xs:token" />
+    </xs:attributeGroup>
+    <xs:group name="other">
+        <xs:sequence>
+            <xs:group minOccurs="0" ref="td:foreignElm"
+                maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:group>
+    <xs:attributeGroup name="other">
+        <xs:attributeGroup ref="td:foreignAttr" />
+    </xs:attributeGroup>
+    <xs:group name="foreignElm">
+        <xs:choice>
+            <xs:any namespace="##other" processContents="skip" />
+            <xs:any namespace="##local" processContents="skip" />
+        </xs:choice>
+    </xs:group>
+    <xs:attributeGroup name="foreignAttr">
+        <xs:anyAttribute namespace="##other"
+            processContents="skip" />
+    </xs:attributeGroup>
+</xs:schema>

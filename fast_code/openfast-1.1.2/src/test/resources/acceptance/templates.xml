@@ -1,0 +1,151 @@
+<templates ns="http://www.openfast.org" templateNs="http://www.openfast.org/templates" xmlns="http://www.fixprotocol.org/ns/fast/td/1.1">
+    <template name="MandatorySignedInteger32Fields" id="1">
+        <typeRef name="IntegerSet" ns="org.openfast"/>
+        <int32 name="None" id="1"/>
+        <int32 name="Copy" id="2">
+            <copy/>
+        </int32>
+        <int32 name="Copy4" id="3">
+            <copy value="4"/>
+        </int32>
+        <int32 name="DefaultMinus5" id="4">
+            <default value="-5"/>
+        </int32>
+        <int32 name="DefaultMax" id="5">
+            <default value="2147483647"/>
+        </int32>
+        <int32 name="DefaultMin" id="6">
+            <default value="-2147483648"/>
+        </int32>
+        <int32 name="Delta" id="7">
+            <delta/>
+        </int32>
+        <int32 name="Constant100" id="8">
+            <constant value="100"/>
+        </int32>
+        <int32 name="Increment" id="9">
+            <increment/>
+        </int32>
+        <int32 name="Increment1" id="9">
+            <increment value="1"/>
+        </int32>
+    </template>
+    <template name="MandatorySignedInteger64Fields" id="2">
+        <typeRef name="IntegerSet" ns="org.openfast"/>
+        <int64 name="None" id="1"/>
+        <int64 name="Copy" id="2">
+            <copy/>
+        </int64>
+        <int64 name="Copy4" id="3">
+            <copy value="4"/>
+        </int64>
+        <int64 name="DefaultMinus5" id="4">
+            <default value="-5"/>
+        </int64>
+        <int64 name="DefaultMax" id="5">
+            <default value="9223372036854775807"/>
+        </int64>
+        <int64 name="DefaultMin" id="6">
+            <default value="-9223372036854775808"/>
+        </int64>
+        <int64 name="Delta" id="7">
+            <delta/>
+        </int64>
+        <int64 name="Constant100" id="8">
+            <constant value="100"/>
+        </int64>
+        <int64 name="Increment" id="9">
+            <increment/>
+        </int64>
+        <int64 name="Increment1" id="9">
+            <increment value="1"/>
+        </int64>
+    </template>
+    <template name="MandatoryUnsignedInteger32Fields" id="3">
+        <typeRef name="UnsignedIntegerSet" ns="org.openfast"/>
+        <uInt32 name="None" id="1"/>
+        <uInt32 name="Copy" id="2">
+            <copy/>
+        </uInt32>
+        <uInt32 name="Copy4" id="3">
+            <copy value="4"/>
+        </uInt32>
+        <uInt32 name="Default37" id="4">
+            <default value="37"/>
+        </uInt32>
+        <uInt32 name="DefaultMax" id="5">
+            <default value="4294967295"/>
+        </uInt32>
+        <uInt32 name="DefaultMin" id="6">
+            <default value="0"/>
+        </uInt32>
+        <uInt32 name="Delta" id="7">
+            <delta/>
+        </uInt32>
+        <uInt32 name="Constant100" id="8">
+            <constant value="100"/>
+        </uInt32>
+        <uInt32 name="Increment" id="9">
+            <increment/>
+        </uInt32>
+        <uInt32 name="Increment1" id="9">
+            <increment value="1"/>
+        </uInt32>
+    </template>
+    <template name="MandatoryUnsignedInteger64Fields" id="4">
+        <typeRef name="IntegerSet" ns="org.openfast"/>
+        <uInt64 name="None" id="1"/>
+        <uInt64 name="Copy" id="2">
+            <copy/>
+        </uInt64>
+        <uInt64 name="Copy4" id="3">
+            <copy value="4"/>
+        </uInt64>
+        <uInt64 name="Default37" id="4">
+            <default value="37"/>
+        </uInt64>
+        <uInt64 name="DefaultMax" id="5">
+            <default value="9223372036854775807"/>
+            <!-- default value="18446744073709551615"/ -->
+        </uInt64>
+        <uInt64 name="DefaultMin" id="6">
+            <default value="0"/>
+        </uInt64>
+        <uInt64 name="Delta" id="7">
+            <delta/>
+        </uInt64>
+        <uInt64 name="Constant100" id="8">
+            <constant value="100"/>
+        </uInt64>
+        <uInt64 name="Increment" id="9">
+            <increment/>
+        </uInt64>
+        <uInt64 name="Increment1" id="9">
+            <increment value="1"/>
+        </uInt64>
+    </template>
+    <template name="MandatoryAsciiString">
+        <string name="None"/>
+        <string name="Copy">
+            <copy/>
+        </string>
+        <string name="CopyIBM">
+            <copy value="IBM"/>
+        </string>
+        <string name="DefaultJSP">
+            <default value="JSP"/>
+        </string>
+        <string name="Delta">
+            <delta/>
+        </string>
+        <string name="Constant">
+            <constant value="FIX.4.4"/>
+        </string>
+        <string name="Tail">
+            <tail/>
+        </string>
+        <string name="TailOrd">
+            <tail value="ord001"/>
+        </string>
+    </template>
+</templates>

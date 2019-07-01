@@ -1,0 +1,13 @@
+<templates>
+   <template name="element" id="1">
+       <string name="nodeName" key="names"><map/></string>
+       <sequence name="attributes" presence="optional">
+           <string name="name" key="names"><map/></string>
+           <string name="value" key="values"><map/></string>
+       </sequence>
+       <sequence name="children" presence="optional">
+           <templateRef/>
+       </sequence>
+       <string name="value" presence="optional"/>
+   </template>
+</templates>

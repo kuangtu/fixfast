@@ -1,0 +1,4 @@
+None,Copy,Copy4,Default37,DefaultMax,DefaultMin,Delta,Constant100,Increment,Increment1,Encoded
+0,0,0,0,0,0,0,100,0,1,fd8380808080808080
+1,0,0,37,4294967295,0,0,100,1,2,808180
+2,1,1,1,1,1,1,100,4294967295,4294967295,3fc0828181818181810f7f7f7fff0f7f7f7fff

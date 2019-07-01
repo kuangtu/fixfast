@@ -1,0 +1,105 @@
+<templates>
+  <template name="MarketDataIncrementalRefresh_25" id="25" dictionary="25">
+    <string name="MsgType" id="35">
+      <constant value="X" />
+    </string>
+    <uInt32 name="MsgSeqNum" id="34" />
+    <uInt64 name="SendingTime" id="52" />
+    <string name="ApplVerID" id="1128" presence="optional">
+      <constant value="9" />
+    </string>
+    <uInt32 name="TradeDate" id="75" presence="optional">
+        <default />
+    </uInt32>
+    <sequence name="MDEntries">
+      <length name="NoMDEntries" id="268" />
+      <string name="MDUpdateAction" id="279">
+        <copy />
+      </string>
+      <string name="MDEntryType" id="269">
+        <copy />
+      </string>
+      <uInt32 name="RptSeq" id="83" presence="optional">
+        <increment />
+      </uInt32>
+      <!-- 1.5.1 -->
+      <uInt32 name="PriceBandType" id="6939" presence="optional">
+          <default />
+      </uInt32>
+      <!-- component InstrumentIdentification -->
+      <int64 name="SecurityID" id="48" presence="optional">
+        <copy />
+      </int64>
+      <string name="SecurityIDSource" id="22" presence="optional">
+        <default value="8" />
+      </string>
+      <string name="SecurityExchange" id="207" presence="optional">
+        <default value="BVMF" />
+      </string>
+      <!--1.4.1-->
+      <string name="MDStreamID" id="1500" presence="optional">
+          <default />
+      </string>
+      <decimal name="MDEntryPx" id="270" presence="optional">
+        <delta />
+      </decimal>
+      <decimal name="MDEntrySize" id="271" presence="optional">
+        <delta />
+      </decimal>
+      <uInt32 name="MDEntryDate" id="272">
+        <copy />
+      </uInt32>
+      <uInt32 name="MDEntryTime" id="273">
+        <copy />
+      </uInt32>
+      <string name="TickDirection" id="274" presence="optional">
+        <default />
+      </string>
+      <!--1.4.1-->
+      <string name="QuoteCondition" id="276" presence="optional">
+          <default />
+      </string>
+      <string name="TradeCondition" id="277" presence="optional">
+        <default />
+      </string>
+      <string name="OpenCloseSettlFlag" id="286" presence="optional">
+        <default />
+      </string>
+      <uInt64 name="NoSharesIssued" id="7595" presence="optional">
+          <default />
+      </uInt64>
+      <string name="Currency" id="15" presence="optional" ><default/></string>
+      <string name="OrderID" id="37" presence="optional" ><default/></string>
+      <string name="TradeID" id="1003" presence="optional"  ><default/></string>
+      <string name="MDEntryBuyer" id="288" presence="optional">
+        <copy />
+      </string>
+      <string name="MDEntrySeller" id="289" presence="optional">
+        <copy />
+      </string>
+      <uInt32 name="NumberOfOrders" id="346" presence="optional">
+        <default />
+      </uInt32>
+      <uInt32 name="MDEntryPositionNo" id="290" presence="optional">
+        <increment />
+      </uInt32>
+      <!--1.4.1 AggressorSide only used in GLOBEX-->
+      <!--1.4.1-->
+      <uInt32 name="PriceType" id="423" presence="optional"><default /></uInt32>
+      
+      <decimal name="NetChgPrevDay" id="451" presence="optional"><default /></decimal>
+      <!--1.4.1-->
+      <uInt32 name="SellerDays" id="287" presence="optional"><default/></uInt32>
+      <uInt32 name="SettlPriceType" id="731" presence="optional"><default/></uInt32>
+      <decimal name="TradeVolume" id="1020" presence="optional"><default/></decimal>
+      <uInt32 name="PriceLimitType" id="1306" presence="optional"><default/></uInt32>
+      <decimal name="LowLimitPrice" id="1148" presence="optional" ><default /></decimal>
+      <decimal name="HighLimitPrice" id="1149" presence="optional" ><default /></decimal>
+      <decimal name="TradingReferencePrice" id="1150" presence="optional" ><default /></decimal>
+      <!-- Stock-index related fields, like PercentageVar, aren't broadcast -->
+      <!-- Probe -->
+      <uInt64 name="MDEntryID" id="278" presence="optional"><default /></uInt64>
+      <uInt32 name="MDInsertDate" id="37016" presence="optional"><default /></uInt32>
+    </sequence>
+  </template>
+</templates>
