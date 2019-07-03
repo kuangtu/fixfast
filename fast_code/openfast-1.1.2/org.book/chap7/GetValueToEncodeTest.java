@@ -266,6 +266,44 @@ public class GetValueToEncodeTest extends TestCase {
 				delta.getValueToEncode(null, ScalarValue.UNDEFINED, field));
 	}
 
+	public void testAsciiTailMand() {
+		Scalar field = new Scalar("tail",Type.ASCII,Operator.TAIL,
+				new StringValue("abc"),false);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		assertEquals(new StringValue("cd"),tail.getValueToEncode(
+				new StringValue("abcd"),new StringValue("abee"),field));
+	}
+	
+	
+	public void testAsciiTailEnMandAll() {
+		Scalar field = new Scalar("tail",Type.ASCII,Operator.TAIL,
+				new StringValue("abc"),false);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		assertEquals(new StringValue("abcd"),tail.getValueToEncode(
+				new StringValue("abcd"),new StringValue("ab"),field));
+	}
+
+	
+	public void testTailEnManUndef() {
+		Scalar field = new Scalar("",Type.ASCII,Operator.TAIL,
+				new StringValue("abc"),false);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		assertEquals(null,tail.getValueToEncode(new StringValue("abc"),
+				ScalarValue.UNDEFINED,field));
+	}
+
+	
+	public void testTailManUndefNoInit() {
+		Scalar field = new Scalar("",Type.ASCII,Operator.TAIL,
+				ScalarValue.UNDEFINED,true);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		assertEquals(new StringValue("abc"),tail.getValueToEncode(
+				new StringValue("abc"),ScalarValue.UNDEFINED,field));
+	}
+
+	
+	
+
 
 	
 
