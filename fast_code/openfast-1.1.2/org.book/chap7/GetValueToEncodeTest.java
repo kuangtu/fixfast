@@ -285,7 +285,7 @@ public class GetValueToEncodeTest extends TestCase {
 
 	
 	public void testTailEnManUndef() {
-		Scalar field = new Scalar("",Type.ASCII,Operator.TAIL,
+		Scalar field = new Scalar("tail",Type.ASCII,Operator.TAIL,
 				new StringValue("abc"),false);
 		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
 		assertEquals(null,tail.getValueToEncode(new StringValue("abc"),
@@ -294,7 +294,7 @@ public class GetValueToEncodeTest extends TestCase {
 
 	
 	public void testTailManUndefNoInit() {
-		Scalar field = new Scalar("",Type.ASCII,Operator.TAIL,
+		Scalar field = new Scalar("tail",Type.ASCII,Operator.TAIL,
 				ScalarValue.UNDEFINED,true);
 		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
 		assertEquals(new StringValue("abc"),tail.getValueToEncode(
