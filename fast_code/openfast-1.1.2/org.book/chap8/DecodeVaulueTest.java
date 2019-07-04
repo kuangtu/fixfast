@@ -85,4 +85,28 @@ public class DecodeVaulueTest extends TestCase {
 		assertEquals(null, copy.decodeEmptyValue(ScalarValue.UNDEFINED, field));
 	}
 
+	public void testIncrMandPrest() {
+		OperatorCodec incr = Operator.INCREMENT.getCodec(Type.U32);
+		Scalar field = new Scalar("incr", Type.U32, Operator.INCREMENT, new IntegerValue(4), false);
+		assertEquals(new IntegerValue(2), incr.decodeValue(new IntegerValue(2), new IntegerValue(3), field));
+	}
+
+	public void testIncrOptiNotPrest() {
+		OperatorCodec incr = Operator.INCREMENT.getCodec(Type.U32);
+		Scalar field = new Scalar("incr", Type.U32, Operator.INCREMENT, new IntegerValue(4), true);
+		assertEquals(new IntegerValue(5), incr.decodeEmptyValue(new IntegerValue(4), field));
+	}
+
+	public void testIncrOptNotPrestInit() {
+		OperatorCodec incr = Operator.INCREMENT.getCodec(Type.U32);
+		Scalar field = new Scalar("incr", Type.U32, Operator.INCREMENT, new IntegerValue(4), true);
+		assertEquals(new IntegerValue(4), incr.decodeEmptyValue(ScalarValue.UNDEFINED, field));
+	}
+
+	public void testIncrOptionalNotPrestNoInit() {
+		OperatorCodec incr = Operator.INCREMENT.getCodec(Type.U32);
+		Scalar field = new Scalar("incr", Type.U32, Operator.INCREMENT, ScalarValue.UNDEFINED, true);
+		assertEquals(null, incr.decodeEmptyValue(ScalarValue.UNDEFINED, field));
+	}
+
 }
