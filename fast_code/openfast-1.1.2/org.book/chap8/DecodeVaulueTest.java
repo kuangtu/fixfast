@@ -7,6 +7,9 @@ import org.openfast.template.operator.*;
 import org.openfast.*;
 import org.openfast.ByteUtil;
 
+import bookUtil.BookUtilTest;
+import bookUtil.BookUtilTest.*;
+
 import junit.framework.TestCase;
 
 public class DecodeVaulueTest extends TestCase {
@@ -107,6 +110,71 @@ public class DecodeVaulueTest extends TestCase {
 		OperatorCodec incr = Operator.INCREMENT.getCodec(Type.U32);
 		Scalar field = new Scalar("incr", Type.U32, Operator.INCREMENT, ScalarValue.UNDEFINED, true);
 		assertEquals(null, incr.decodeEmptyValue(ScalarValue.UNDEFINED, field));
+	}
+
+	public void testIntDeltaMand() {
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.U32);
+		Scalar field = new Scalar("delta", Type.U32, Operator.DELTA, new IntegerValue(4), false);
+		assertEquals(new IntegerValue(0), delta.decodeValue(new IntegerValue(4), new IntegerValue(-4), field));
+	}
+
+	public void testDeltaMandUndef() {
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.U32);
+		Scalar field = new Scalar("delta", Type.U32, Operator.DELTA, new IntegerValue(4), false);
+		assertEquals(new IntegerValue(8), delta.decodeValue(new IntegerValue(4), ScalarValue.UNDEFINED, field));
+	}
+
+	public void testDeltaOptNULL() {
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.U32);
+		Scalar field = new Scalar("delta", Type.U32, Operator.DELTA, new IntegerValue(4), true);
+		assertEquals(null, delta.decodeValue(ScalarValue.NULL, ScalarValue.UNDEFINED, field));
+	}
+
+	public void testDeltaOptUndefNoInit() {
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.U32);
+
+		Scalar field = new Scalar("delta", Type.U32, Operator.DELTA, ScalarValue.UNDEFINED, true);
+
+		assertEquals(new IntegerValue(4), delta.decodeValue(new IntegerValue(4), ScalarValue.UNDEFINED, field));
+	}
+
+	public void testDecimalDeltaMand() {
+		Scalar field = new Scalar("delta", Type.DECIMAL, Operator.DELTA, new DecimalValue(10.0), false);
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.DECIMAL);
+		DecimalValue value = (DecimalValue) delta.decodeValue(new DecimalValue(1.0), new DecimalValue(2.2), field);
+		assertEquals(23, value.mantissa);
+		assertEquals(-1, value.exponent);
+	}
+
+	public void testDecimalDeltaOptUndef() {
+		Scalar field = new Scalar("delta", Type.DECIMAL, Operator.DELTA, new DecimalValue(10.0), false);
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.DECIMAL);
+		DecimalValue value = (DecimalValue) delta.decodeValue(new DecimalValue(1.0), ScalarValue.UNDEFINED, field);
+		assertEquals(2, value.mantissa);
+		assertEquals(1, value.exponent);
+	}
+
+	public void testDecimalDeltaOptUndefNoInit() {
+		Scalar field = new Scalar("delta", Type.DECIMAL, Operator.DELTA, ScalarValue.UNDEFINED, true);
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.DECIMAL);
+		DecimalValue value = (DecimalValue) delta.decodeValue(new DecimalValue(10.9), ScalarValue.UNDEFINED, field);
+
+		assertEquals(109, value.mantissa);
+		assertEquals(-1, value.exponent);
+	}
+
+	public void testStrDeltaMand() {
+		Scalar field = new Scalar("", Type.ASCII, Operator.DELTA, new StringValue("abc"), false);
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.ASCII);
+		ScalarValue value = delta.decodeValue(BookUtilTest.tv(1, "ba"), new StringValue("abc"), field);
+		assertEquals(value.toString(), "abba");
+	}
+
+	public void testStrDeltaOptUndef() {
+		Scalar field = new Scalar("delta", Type.ASCII, Operator.DELTA, new StringValue("abc"), true);
+		OperatorCodec delta = Operator.DELTA.getCodec(Type.ASCII);
+		ScalarValue value = delta.decodeValue(BookUtilTest.tv(-2, "aaa"), ScalarValue.UNDEFINED, field);
+		assertEquals(value.toString(), "aaabc");
 	}
 
 }
