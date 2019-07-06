@@ -198,7 +198,7 @@ public class DecodeVaulueTest extends TestCase {
 		assertEquals(new StringValue("aab"), value);
 	}
 
-	public void testStrTailEnOptUndefNoInit() {
+	public void testStrTailOptUndefNoInit() {
 		Scalar field = new Scalar("tail", Type.ASCII, Operator.TAIL, ScalarValue.UNDEFINED, true);
 		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
 		ScalarValue value = tail.decodeValue(new StringValue("ab"), ScalarValue.UNDEFINED, field);
