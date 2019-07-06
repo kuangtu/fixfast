@@ -177,4 +177,50 @@ public class DecodeVaulueTest extends TestCase {
 		assertEquals(value.toString(), "aaabc");
 	}
 
+	public void testStrTailMand() {
+		Scalar field = new Scalar("tail", Type.ASCII, Operator.TAIL, new StringValue("abc"), false);
+		OperatorCodec delta = Operator.TAIL.getCodec(Type.ASCII);
+		ScalarValue value = delta.decodeValue(new StringValue("ab"), new StringValue("abc"), field);
+		assertEquals(new StringValue("aab"), value);
+	}
+
+	public void testStrTailMandFull() {
+		Scalar field = new Scalar("tail", Type.ASCII, Operator.TAIL, new StringValue("abc"), false);
+		OperatorCodec delta = Operator.TAIL.getCodec(Type.ASCII);
+		ScalarValue value = delta.decodeValue(new StringValue("efgh"), new StringValue("abc"), field);
+		assertEquals(new StringValue("efgh"), value);
+	}
+
+	public void testTailStrUndef() {
+		Scalar field = new Scalar("delta", Type.ASCII, Operator.TAIL, new StringValue("abc"), false);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		ScalarValue value = tail.decodeValue(new StringValue("ab"), ScalarValue.UNDEFINED, field);
+		assertEquals(new StringValue("aab"), value);
+	}
+
+	public void testStrTailEnOptUndefNoInit() {
+		Scalar field = new Scalar("tail", Type.ASCII, Operator.TAIL, ScalarValue.UNDEFINED, true);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		ScalarValue value = tail.decodeValue(new StringValue("ab"), ScalarValue.UNDEFINED, field);
+		assertEquals(new StringValue("ab"), value);
+	}
+
+	public void testStrTailOptNoPrest() {
+		Scalar field = new Scalar("tail", Type.ASCII, Operator.TAIL, new StringValue("abc"), false);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		assertEquals(new StringValue("efg"), tail.decodeEmptyValue(new StringValue("efg"), field));
+	}
+
+	public void testTailStrOptNoPrestInit() {
+		Scalar field = new Scalar("tail", Type.ASCII, Operator.TAIL, new StringValue("abcd"), true);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		assertEquals(new StringValue("abcd"), tail.decodeEmptyValue(ScalarValue.UNDEFINED, field));
+	}
+
+	public void testTailStrOptNoPrestNoInit() {
+		Scalar field = new Scalar("tail", Type.ASCII, Operator.TAIL, ScalarValue.UNDEFINED, true);
+		OperatorCodec tail = Operator.TAIL.getCodec(Type.ASCII);
+		assertEquals(null, tail.decodeEmptyValue(ScalarValue.UNDEFINED, field));
+	}
+
 }
