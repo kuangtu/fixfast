@@ -75,6 +75,4 @@ public class FASTDecodeProcTest extends OpenFastTestCase {
 
 	}
 	
-
-
 }
