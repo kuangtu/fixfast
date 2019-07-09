@@ -38,9 +38,11 @@ public class BitVectorBuilder {
         return vector;
     }
     public void setOnValueSkipOnNull(Object value) {
+    	//字段值为null,对应bit不设置为1
         if (value == null)
             skip();
         else
+        	//对应bit设置为1
             set();
     }
     public int getIndex() {

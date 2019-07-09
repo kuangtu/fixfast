@@ -43,10 +43,11 @@ public abstract class OptionallyPresentOperatorCodec extends OperatorCodec {
      * @return the value that should be used if no value is present in the fast stream 
      */
     public ScalarValue decodeEmptyValue(ScalarValue priorValue, Scalar field) {
+    	//如果前值未定义,调用CopyOperatorCodec中的getInitialValue方法
         if (priorValue == ScalarValue.UNDEFINED) {
             return getInitialValue(field);
         }
-
+        //调用CopyOperatorCodec中的getEmptyValue方法
         return getEmptyValue(priorValue);
     }
 
@@ -57,10 +58,13 @@ public abstract class OptionallyPresentOperatorCodec extends OperatorCodec {
      * @return the value that should be encoded over the fast stream given the previous value for this field
      */
     public ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, Scalar field) {
+    	//字段值不为null,调用子类中的getValueToEncode方法
         if (value != null) {
             return getValueToEncode(value, priorValue, field.getDefaultValue());
         }
-
+        //字段存在属性是可选类型，前值未定义但有初始值,
+        //或者前值已指定但不为null
+        //通过NULL表示（此时字段值value等于null）
         if (field.isOptional()) {
             if (((priorValue == ScalarValue.UNDEFINED) && !field.getDefaultValue().isUndefined()) || ((priorValue != ScalarValue.UNDEFINED) && (priorValue != null))) {
                 return ScalarValue.NULL;
@@ -68,7 +72,7 @@ public abstract class OptionallyPresentOperatorCodec extends OperatorCodec {
         } else {
             Global.handleError(FastConstants.D6_MNDTRY_FIELD_NOT_PRESENT, "The field \"" + field + " is not present.");
         }
-
+        //其余情况传输值为null
         return null;
     }
 

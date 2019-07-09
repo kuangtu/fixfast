@@ -31,16 +31,19 @@ final class ConstantOperatorCodec extends OperatorCodec {
 
     protected ConstantOperatorCodec(Operator operator, Type[] types) {
         super(operator, types);
-    }
+    }	
     /**
      * 
      */
     public ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, Scalar field, BitVectorBuilder presenceMapBuilder) {
+    	//如果字段存在属性是可选类型,根据value值在PMAP中设置对应的bit位
         if (field.isOptional())
             presenceMapBuilder.setOnValueSkipOnNull(value);
+      //字段值不进行传输
         return null; // Never encode constant value.
     }
     public ScalarValue decodeValue(ScalarValue newValue, ScalarValue previousValue, Scalar field) {
+    	//值为字段初始值
         return field.getDefaultValue();
     }
     public boolean isPresenceMapBitSet(byte[] encoding, FieldValue fieldValue) {
@@ -55,9 +58,11 @@ final class ConstantOperatorCodec extends OperatorCodec {
      * @return
      */
     public ScalarValue decodeEmptyValue(ScalarValue previousValue, Scalar field) {
+    	//如果字段存在类型为强制类型,返回初始值
         if (!field.isOptional()) {
             return field.getDefaultValue();
         }
+        //可选类型，字段值为null
         return null;
     }
     /**

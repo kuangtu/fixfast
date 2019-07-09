@@ -47,9 +47,12 @@ public class CopyOperatorCodec extends OptionallyPresentOperatorCodec {
      *         object, otherwise returns the ScalarValue object
      */
     protected ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, ScalarValue defaultValue) {
+    	//前值未定义,字段值等于初始值,传输值为null,该字段值不传输
         if ((priorValue == ScalarValue.UNDEFINED) && value.equals(defaultValue)) {
             return null;
         }
+        //字段值不等于前值,该字段需要传输
+        //字段值等于前值,传输值为null,该字段值不传输
         return (value.equals(priorValue)) ? null : value;
     }
 
@@ -63,9 +66,12 @@ public class CopyOperatorCodec extends OptionallyPresentOperatorCodec {
      *         object is defined, otherwise returns null
      */
     protected ScalarValue getInitialValue(Scalar field) {
+    	//字段有初始值,则字段的值为初始值
         if (!field.getDefaultValue().isUndefined()) {
             return field.getDefaultValue();
         }
+        //字段没有初始值，且字段存在类型为可选类型
+        //返回null
         if (field.isOptional()) {
             return null;
         }
@@ -77,6 +83,7 @@ public class CopyOperatorCodec extends OptionallyPresentOperatorCodec {
      * @return Returns the variable priorValue
      */
     protected ScalarValue getEmptyValue(ScalarValue priorValue) {
+    	//字段值等于前值
         return priorValue;
     }
 
@@ -84,6 +91,7 @@ public class CopyOperatorCodec extends OptionallyPresentOperatorCodec {
      * @return newValue
      */
     public ScalarValue decodeValue(ScalarValue newValue, ScalarValue priorValue, Scalar field) {
+    	 //字段值就是数据流中的值
         return newValue;
     }
 

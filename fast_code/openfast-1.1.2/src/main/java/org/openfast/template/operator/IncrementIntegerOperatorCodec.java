@@ -32,37 +32,48 @@ final class IncrementIntegerOperatorCodec extends OperatorCodec {
         super(operator, types);
     }
     public ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, Scalar field) {
+    	//如果前值为null,则字段为需要压缩的值
         if (priorValue == null) {
             return value;
         }
+      //如果字段值为null
         if (value == null) {
+        	//字段可选类型，前值未定义,且字段的初始值未定义,返回null，不需要进行传输
             if (field.isOptional()) {
                 if (priorValue == ScalarValue.UNDEFINED && field.getDefaultValue().isUndefined()) {
                     return null;
                 }
+                //通过NULL表示字段值不存在
                 return ScalarValue.NULL;
             } else {
                 throw new IllegalArgumentException();
             }
         }
+        //字段值非null,前值未定义,且与初始值相同,返回null，不需要进行传输
         if (priorValue.isUndefined()) {
             if (value.equals(field.getDefaultValue())) {
                 return null;
             } else {
+            	//前值非null,与初始值也不相同,需要压缩字段值
                 return value;
             }
         }
+        //如果字段值不等于前值加1,需要压缩字段值
         if (!value.equals(((NumericValue) priorValue).increment())) {
             return value;
         }
+        //字段值为前值加1,则不用压缩处理,返回null
         return null;
     }
     public ScalarValue decodeValue(ScalarValue newValue, ScalarValue previousValue, Scalar field) {
+    	//字段值出现在数据流中,则为字段值
         return newValue;
     }
     public ScalarValue decodeEmptyValue(ScalarValue previousValue, Scalar field) {
+    	//如果前值为null,则字段值为null
         if (previousValue == null)
             return null;
+        //如果前值未定义,且初始值为未定义,字段可选类型，字段值为null
         if (previousValue.isUndefined()) {
             if (field.getDefaultValue().isUndefined()) {
                 if (field.isOptional()) {
@@ -71,9 +82,11 @@ final class IncrementIntegerOperatorCodec extends OperatorCodec {
                     throw new IllegalStateException("Field with operator increment must send a value if no previous value existed.");
                 }
             } else {
+            	//前值未定义,字段有初始值,字段值为初始值
                 return field.getDefaultValue();
             }
         }
+        //前值不为空且不是未定义,字段值为前值加1
         return ((NumericValue) previousValue).increment();
     }
     public boolean equals(Object obj) {

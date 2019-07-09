@@ -32,22 +32,30 @@ final class DefaultOperatorCodec extends OperatorCodec {
     }
 
     public ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, Scalar field) {
+    	//字段值为null
         if (value == null) {
+        	//如果字段初始值未定义,返回null表示不存在
             if (field.getDefaultValue().isUndefined())
                 return null;
+            //字段有初始值，传输值为NULL
             return ScalarValue.NULL;
         }
-
+        
+        //如果字段值和初始值相等,返回null，不需要进行压缩,
+        //否则传输值等于字段值
         return value.equals(field.getDefaultValue()) ? null : value;
     }
 
     public ScalarValue decodeValue(ScalarValue newValue, ScalarValue previousValue, Scalar field) {
+    	//数据流中的值即为字段的值
         return newValue;
     }
 
     public ScalarValue decodeEmptyValue(ScalarValue previousValue, Scalar field) {
+    	//数据流中没有传输值,如果初始值未定义,则字段值不存在
         if (field.getDefaultValue().isUndefined())
             return null;
+        //字段值为初始值
         return field.getDefaultValue();
     }
 

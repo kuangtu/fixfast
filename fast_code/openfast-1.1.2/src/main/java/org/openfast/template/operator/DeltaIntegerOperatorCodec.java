@@ -35,11 +35,12 @@ final class DeltaIntegerOperatorCodec extends AlwaysPresentOperatorCodec {
     }
 
     public ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, Scalar field) {
+    	//前值为空,异常
         if (priorValue == null) {
             Global.handleError(FastConstants.D6_MNDTRY_FIELD_NOT_PRESENT, "The field " + field + " must have a priorValue defined.");
             return null;
         }
-
+        //字段值为null,存在属性为可选类型,通过NULL表示
         if (value == null) {
             if (field.isOptional()) {
                 return ScalarValue.NULL;
@@ -47,32 +48,34 @@ final class DeltaIntegerOperatorCodec extends AlwaysPresentOperatorCodec {
                 throw new IllegalArgumentException("Mandatory fields can't be null.");
             }
         }
-
+        //如果前值未定义,前值为字段的缺省默认值
         if (priorValue.isUndefined()) {
             priorValue = field.getBaseValue();
         }
-
+        //返回字段值和前值的差值
         return ((NumericValue) value).subtract((NumericValue) priorValue);
     }
 
     public ScalarValue decodeValue(ScalarValue newValue, ScalarValue previousValue, Scalar field) {
+    	//前值为null,异常
         if (previousValue == null) {
             Global.handleError(FastConstants.D6_MNDTRY_FIELD_NOT_PRESENT, "The field " + field + " must have a priorValue defined.");
             return null;
         }
-
+        //传输值为null或者NULL,字段值为null
         if ((newValue == null) || newValue.isNull()) {
             return null;
         }
-
+        //前值未定义,没有初始值,则取该字段数据类型的缺省基值
         if (previousValue.isUndefined()) {
             if (field.getDefaultValue().isUndefined()) {
                 previousValue = field.getBaseValue();
             } else {
+            	//前值为字段的初始值
                 previousValue = field.getDefaultValue();
             }
         }
-
+        //传输值加前值，得到字段的值
         return ((NumericValue) newValue).add((NumericValue) previousValue);
     }
 
