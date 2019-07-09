@@ -32,18 +32,21 @@ import org.openfast.template.type.Type;
 
 public class Operator implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    
+    //存放操作符的HashMap，根据Name进行查找
     private static final Map OPERATOR_NAME_MAP = new HashMap();
-
+    
+    //操作符名称
     private final String name;
 
     public static final Operator NONE = new Operator("none") {
         private static final long serialVersionUID = 2L;
-
+        
+        //不需要使用字典,字段值一定出现在压缩数据流中
         public boolean usesDictionary() {
             return false;
         }
-
+      //该值不需要进行存放
         public boolean shouldStoreValue(ScalarValue value) {
             return false;
         }
@@ -51,17 +54,20 @@ public class Operator implements Serializable {
     
     public static final Operator CONSTANT = new Operator("constant") {
         private static final long serialVersionUID = 1L;
-
+        
+        //如果该字段的初始值未定义,则报错
         public void validate(Scalar scalar) {
             if (scalar.getDefaultValue().isUndefined())
                 Global.handleError(FastConstants.S4_NO_INITIAL_VALUE_FOR_CONST, "The field " + scalar
                         + " must have a default value defined.");
         }
 
+        //该值不需要进行存放
         public boolean shouldStoreValue(ScalarValue value) {
             return false;
         }
-
+        
+        //不需要使用字典 
         public boolean usesDictionary() {
             return false;
         }
@@ -69,13 +75,14 @@ public class Operator implements Serializable {
 
     public static final Operator DEFAULT = new Operator("default") {
         private static final long serialVersionUID = 1L;
-
+        //如果字段存在属性不是可选类型，且初始值未定义，则报错
         public void validate(Scalar scalar) {
             if (!scalar.isOptional() && scalar.getDefaultValue().isUndefined())
                 Global.handleError(FastConstants.S5_NO_INITVAL_MNDTRY_DFALT, "The field " + scalar
                         + " must have a default value defined.");
         }
-
+        
+        //如果字段值存在，则进行保存
         public boolean shouldStoreValue(ScalarValue value) {
             return value != null;
         }
@@ -83,7 +90,8 @@ public class Operator implements Serializable {
 
     public static final Operator COPY = new Operator("copy") {
         private static final long serialVersionUID = 1L;
-
+        
+        //返回对应操作符的编解码操作
         public OperatorCodec getCodec(Type type) {
             return OperatorCodec.COPY_ALL;
         }
@@ -93,7 +101,7 @@ public class Operator implements Serializable {
 
     public static final Operator DELTA = new Operator("delta") {
         private static final long serialVersionUID = 1L;
-
+        //如果字段存在,则进行保存
         public boolean shouldStoreValue(ScalarValue value) {
             return value != null;
         }
@@ -102,6 +110,7 @@ public class Operator implements Serializable {
     public static final Operator TAIL = new Operator("tail");
 
     public Operator(String name) {
+    	//操作符名称
         this.name = name;
         OPERATOR_NAME_MAP.put(name, this);
     }
@@ -111,7 +120,8 @@ public class Operator implements Serializable {
             throw new IllegalArgumentException("The operator \"" + name + "\" does not exist.");
         return (Operator) OPERATOR_NAME_MAP.get(name);
     }
-
+    
+    //得到对应操作符编解码过程
     public OperatorCodec getCodec(Type type) {
         return OperatorCodec.getCodec(this, type);
     }
@@ -123,7 +133,8 @@ public class Operator implements Serializable {
     public String getName() {
         return name;
     }
-
+    
+    //是否需要将值存放在字典中
     public boolean shouldStoreValue(ScalarValue value) {
         return true;
     }
@@ -146,7 +157,8 @@ public class Operator implements Serializable {
     public int hashCode() {
         return name.hashCode();
     }
-
+    
+    //是否使用字典
     public boolean usesDictionary() {
         return true;
     }

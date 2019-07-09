@@ -32,17 +32,21 @@ final class NoneOperatorCodec extends AlwaysPresentOperatorCodec {
     }
 
     public ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, Scalar field) {
+    	//如果字段值为null,通过NULL值表示
         if (value == null) {
             return ScalarValue.NULL;
         }
+        //不和前值比较,直接压缩字段值
         return value;
     }
 
     public ScalarValue decodeValue(ScalarValue newValue, ScalarValue previousValue, Scalar field) {
+    	//不和前值比较,数据流中压缩的值即为字段值
         return newValue;
     }
 
     public ScalarValue decodeEmptyValue(ScalarValue previousValue, Scalar field) {
+    	//不使用
         throw new IllegalStateException("This method should never be called.");
     }
 

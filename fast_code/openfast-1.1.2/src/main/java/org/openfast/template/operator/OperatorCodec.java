@@ -34,7 +34,9 @@ import org.openfast.util.Key;
 
 public abstract class OperatorCodec implements Serializable {
     private static final long serialVersionUID = 1L;
+    //操作符映射表
     private static final Map OPERATOR_MAP = new HashMap();
+    //不同操作符编解码类的对象，按照不同的数据类型处理
     protected static final OperatorCodec NONE_ALL = new NoneOperatorCodec(Operator.NONE, Type.ALL_TYPES);
     protected static final OperatorCodec CONSTANT_ALL = new ConstantOperatorCodec(Operator.CONSTANT, Type.ALL_TYPES);
     protected static final OperatorCodec DEFAULT_ALL = new DefaultOperatorCodec(Operator.DEFAULT, Type.ALL_TYPES);
@@ -83,8 +85,9 @@ public abstract class OperatorCodec implements Serializable {
         return (OperatorCodec) OPERATOR_MAP.get(key);
     }
 
+    //根据前值和字段值进行"比较",得到需要传输值
     public abstract ScalarValue getValueToEncode(ScalarValue value, ScalarValue priorValue, Scalar field);
-
+    //根据前值和数据流中的传输值，得到字段值
     public abstract ScalarValue decodeValue(ScalarValue newValue, ScalarValue priorValue, Scalar field);
 
     /**
@@ -98,7 +101,7 @@ public abstract class OperatorCodec implements Serializable {
     public boolean isPresenceMapBitSet(byte[] encoding, FieldValue fieldValue) {
         return encoding.length != 0;
     }
-
+    //如果数据流中没有传输值,根据前值得到字段的值
     public abstract ScalarValue decodeEmptyValue(ScalarValue previousValue, Scalar field);
 
     /**
