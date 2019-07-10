@@ -35,7 +35,9 @@ public class BitVectorReader {
             return true;
         }
     };
+    //存在图
     private final BitVector vector;
+    //存在图中的索引
     private int index = 0;
 
     public BitVectorReader(BitVector vector) {
@@ -43,6 +45,8 @@ public class BitVectorReader {
     }
 
     public boolean read() {
+        //存在图中读取bit值
+     	//index位存在图bit位序号
         return vector.isSet(index++);
     }
 
