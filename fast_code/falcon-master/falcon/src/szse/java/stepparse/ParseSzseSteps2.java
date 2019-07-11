@@ -35,14 +35,14 @@ import falcon.fix.MessageType;
 import falcon.fix.ParseException;
 import falcon.fix.Protocol;
 
-public class ParseSzseSteps {
+public class ParseSzseSteps2 {
 
 	static InputStream templateSource = null;
 	static XMLMessageTemplateLoader templateLoader = null;
 
-	public ParseSzseSteps() {
+	public ParseSzseSteps2() {
 		try {
-			templateSource = new FileInputStream("data\\fast_template_STEP1.20_SZ_1.00.xml");
+			templateSource = new FileInputStream("fast_template_STEP1.20_SZ_1.00.xml");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,9 +50,6 @@ public class ParseSzseSteps {
 		templateLoader = new XMLMessageTemplateLoader();
 		templateLoader.setLoadTemplateIdFromAuxId(true);
 		templateLoader.load(templateSource);
-		
-		
-		
 	}
 
 	private static int sum(ByteBuffer buf) {
@@ -115,7 +112,10 @@ public class ParseSzseSteps {
 		ByteString raw = null;
 
 		if (msg.value().equalsIgnoreCase("W")) {
+			System.out.println("the msg tpe is: " + msg.value());
+			System.out.println("the msg fields number is: " + s.fields().size());
 			for (Field f : s.fields()) {
+				// System.out.println("the tag is: " + f.tag());
 				if (f.tag() == 96) {
 					raw = (ByteString) f.value();
 					ParseSnap(raw);
@@ -136,26 +136,22 @@ public class ParseSzseSteps {
 		Message md = null;
 		while ((md = mis.readMessage()) != null) {
 			System.out.println("the mesage template id is: " + md.getTemplate().getId());
-			System.out.println(md.getLong("OrigTime"));			
+			System.out.println(md.getLong("OrigTime"));
+			System.out.println(md.getString("SecurityID"));
 			System.out.println(md.getInt("ChannelNo"));
 			System.out.println(md.getString("MDStreamID"));
-			System.out.println(md.getString("SecurityID"));
 			System.out.println(md.getString("SecurityIDSource"));
 			System.out.println(md.getString("TradingPhaseCode"));
 			System.out.println(md.getLong("PreClosePx"));
 			System.out.println(md.getLong("NumTrades"));
 			System.out.println(md.getLong("TotalVolumeTrade"));
-			System.out.println(md.getLong("TotalValueTrade"));
 		}
 
 		mis.reset();
 	}
 
-
 	public static void main(String args[]) throws FileNotFoundException, ParseException {
 
-		ParseSzseSteps parse = new ParseSzseSteps();
-		
 		File origFile = new File("data\\step.dat");
 		FileInputStream origStream = new FileInputStream(origFile);
 
@@ -186,65 +182,47 @@ public class ParseSzseSteps {
 		int start = 0;
 		buffer.flip();
 		List<Field> fields = new ArrayList<Field>();
-		List<falcon.fix.Message> msgs = new ArrayList<falcon.fix.Message>();    
-        while (buffer.remaining() > 0) {
-            start = buffer.position();
-            Protocol.match(buffer, BeginString);
-            int bodyLen = Protocol.matchInt(buffer, BodyLength);
-            int msgTypeOffset = buffer.position();
-            //得到该条STEP消息的类型
-            msgType = getMsgType(buffer);
-            int checksumOffset = msgTypeOffset + bodyLen;
-            buffer.position(checksumOffset);
-            long checksumActual = sumlong(buffer, start, buffer.position()) % 256;
-            int checksumExpected = Protocol.matchInt(buffer, CheckSum);
-            if (checksumExpected != checksumActual) {
-                throw new RuntimeException(
-                        String.format("Invalid checksum: expected %d, got: %d", checksumExpected, checksumActual));
-            }
+		List<falcon.fix.Message> msgs = new ArrayList<falcon.fix.Message>();
+		while (buffer.remaining() > 0) {
+			start = buffer.position();
+			Protocol.match(buffer, BeginString);
+			int bodyLen = Protocol.matchInt(buffer, BodyLength);
+			int msgTypeOffset = buffer.position();
+			// 得到该条STEP消息的类型
+			msgType = getMsgType(buffer);
 
-            int endOffset = buffer.position();
-            // process snapshot message
-            if (msgType.value().equalsIgnoreCase("W")) {
-                int len = 0;
-                int iCount = 0;
-                ByteString value = null;
-                buffer.position(msgTypeOffset);
-                //循环遍历得到该消息中的每个字段(tag)和字段值(value)
-                while (buffer.position() < checksumOffset) {
-                    int tag = Protocol.parseInt(buffer, (byte) '=');
-                    //如果tag=95,得到FAST消息体的长度
-                    if (tag == 95) {
-                        value = Protocol.parseString(buffer, (byte) 0x01);
-                        len = Integer.parseInt(new String(value.getData()));
-                        fields.add(new Field(tag, value));
-                    }
-                    else if (tag == 96) {
-                        //如果tag=96,根据之前得到的FAST消息长度length,
-                        //将"96="之后的length长度的字节数组拷贝到value中
-                        byte[] raw = new byte[len];
-                        for (iCount = 0; iCount < len; iCount++) {
-                            raw[iCount] = buffer.get();
-                        }
-                        fields.add(new Field(tag, new ByteString(raw)));
-                    }
-                    else { 
-                        //如果是其他字段,通过delimiter得到value
-                        value = Protocol.parseString(buffer, (byte) 0x01);
-                        fields.add(new Field(tag, value));    
-                    }
-                    //跳过delimiter字节
-                    buffer.get();
-                }
-                
-                //跳转到下一条STEP消息
-                buffer.position(endOffset);
-                falcon.fix.Message msg = new falcon.fix.Message(msgType, fields);
-                //一条快照消息的类型和字段列表存放到消息列表中
-                msgs.add(msg);
+			int checksumOffset = msgTypeOffset + bodyLen;
+			buffer.position(checksumOffset);
+			long checksumActual = sumlong(buffer, start, buffer.position()) % 256;
+			int checksumExpected = Protocol.matchInt(buffer, CheckSum);
+			if (checksumExpected != checksumActual) {
+				throw new RuntimeException(
+						String.format("Invalid checksum: expected %d, got: %d", checksumExpected, checksumActual));
+			}
 
-            }
-        }
+			int endOffset = buffer.position();
+			buffer.position(msgTypeOffset);
+
+			if (msgType.value().equalsIgnoreCase("W")) {
+				System.out.println("get the fields.");
+			}
+			// 循环遍历得到该消息中的每个字段(tag)和字段值(value)
+			while (buffer.position() < checksumOffset) {
+				int tag = Protocol.parseInt(buffer, (byte) '=');
+				System.out.println("the tag is: " + tag);
+				if (tag == 96) {
+					System.out.println("found 96 tag");
+				}
+				ByteString value = Protocol.parseString(buffer, (byte) 0x01);
+				fields.add(new Field(tag, value));
+			}
+			buffer.position(endOffset);
+			falcon.fix.Message msg = new falcon.fix.Message(msgType, fields);
+			msgs.add(msg);
+
+		}
+
+		System.out.println("start parse: " + msgs.size());
 
 		for (falcon.fix.Message s : msgs) {
 			DoParse(s);

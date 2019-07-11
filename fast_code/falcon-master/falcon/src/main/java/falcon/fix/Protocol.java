@@ -94,33 +94,46 @@ public class Protocol {
   }
 
   public static int parseInt(ByteBuffer buf, byte delimiter) {
+	//如果以'-'开始,则认为是负数
     int sign = 1;
     if (buf.get(buf.position()) == (byte)'-') {
       buf.get();
       sign = -1;
     }
     int result = 0;
+    //读取byte buffer知道碰到delimiter
+    //此时buf的位置指向了delimiter之后的一个字节
     for (;;) {
       byte ch = buf.get();
       if (ch == delimiter) {
         break;
       }
+      //最先读取的是整数的高位,需要每次*10移位
       result *= 10;
+      //如果byte中存放的字母'1',ascii码为49,减去'0',得到整数1
       result += (byte)ch - (byte)'0';
     }
+    //返回整数
     return sign * result;
   }
 
   public static ByteString parseString(ByteBuffer buf, byte delimiter) {
+	//开始处理时buffer的位置
     int start = buf.position();
     for (;;) {
       byte ch = buf.get();
+      //直到delimiter位置
+      //此时buffer中的position为delimiter之后的位置
       if (ch == delimiter) {
         break;
       }
     }
+    //此时end指向了delimiter
     int end = buf.position() - 1;
+    //将position指向了start开始位置
     buf.position(start);
+    //end - start为delimiter之前byte字符的数目length
+    //读取从start开始length长度字节数组,保存在ByteString对象
     return ByteString.of(buf, end-start);
   }
 
@@ -149,7 +162,9 @@ public class Protocol {
   }
 
   public static void matchTag(ByteBuffer buf, int tag) throws ParseException {
+	//从buffer中读取整数,直到'='
     int actual = parseInt(buf, (byte)'=');
+    //如果与给定的tag不同,异常
     if (actual != tag) {
       throw new ParseFailedException("Required tag missing");
     }
