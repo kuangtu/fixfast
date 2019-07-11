@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/szse/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="var" path="M2_REPO/com/github/stephenc/jamm/0.2.5/jamm-0.2.5.jar"/>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/openfast-1.1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="libs/openfast-1.1.2-sources.jar"/>
+	<classpathentry kind="lib" path="libs/openfast-1.1.2.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
