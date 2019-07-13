@@ -82,14 +82,14 @@ public class TypeInstructionTest extends TestCase {
 		String res = ByteUtil.convertByteArrayToBitString(encoding);
 		assertEquals("10000000", res);
 	}
-
 	public void testUnicodeStrEncodeDecode() {
-		ScalarValue value = new StringValue("½»Ò×Ëù");
-		byte[] encoding = TypeCodec.NULLABLE_UNICODE.encode(value);
-		String res = ByteUtil.convertByteArrayToBitString(encoding);
-		assertEquals("10001010 11100100 10111010 10100100 11100110 10011000 " + "10010011 ¡°1100110 10001001 10000000",
-				res);
-	}
+		 ScalarValue value = new StringValue("äº¤æ˜“æ‰€");
+		        byte[] encoding = TypeCodec.NULLABLE_UNICODE.encode(value);
+		        String res = ByteUtil.convertByteArrayToBitString(encoding);
+		        assertEquals("10001010 11100100 10111010 10100100 11100110 10011000 "
+		                + "10010011 11100110 10001001 10000000", res);
+		    }
+
 
 	public void testDecimal() {
 		ScalarValue value = new DecimalValue(1024000);
