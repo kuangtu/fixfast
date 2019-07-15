@@ -215,7 +215,7 @@ public class PMAPTest extends OpenFastTestCase {
 		String res = ByteUtil.convertByteArrayToBitString(encoding);
 		
 		assertEquals("10000010 11100000 10000010 10000010 10000011 10000000 10000100", res);
-	}
+	}	
 
 	public void testSequenceNULL() {
 		Scalar scalar1 = new Scalar("1", Type.U32, Operator.COPY, ScalarValue.UNDEFINED, true);
