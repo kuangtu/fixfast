@@ -5,6 +5,7 @@ import org.openfast.template.*;
 import org.openfast.template.type.*;
 import org.openfast.template.operator.*;
 import org.openfast.*;
+import org.openfast.codec.FastDecoder;
 import org.openfast.codec.FastEncoder;
 import org.openfast.template.*;
 import org.openfast.template.loader.*;
@@ -138,5 +139,31 @@ public class DictTest extends OpenFastTestCase {
 		assertEquals("11100000 10001010 10000010", ByteUtil.convertByteArrayToBitString(encoding));
 
 	}
+
+	public void testOperDictStoreValue() {
+		  	  
+		  MessageTemplate template1 = new MessageTemplate("", new Field[] {
+//	                new Scalar("1", Type.U32, Operator.NONE, ScalarValue.UNDEFINED, false),       
+//	                new Scalar("1", Type.U32, Operator.CONSTANT, new IntegerValue(1), false),     
+//	                new Scalar("1", Type.U32, Operator.COPY, new IntegerValue(1), false),     
+//	                new Scalar("1", Type.U32, Operator.DELTA, new IntegerValue(1), false),   
+//	                new Scalar("1", Type.U32, Operator.DEFAULT, new IntegerValue(1), false),  
+//	                new Scalar("1", Type.U32, Operator.INCREMENT, new IntegerValue(1), false),  
+	                new Scalar("1", Type.ASCII, Operator.TAIL, new StringValue("ab"), false),  
+		  });
+		  
+	        Context context = new Context();
+	        context.registerTemplate(113, template1);
+	        FastEncoder encoder = new FastEncoder(context);
+	        
+	        Message msg1 = new Message(template1);
+	        msg1.setString(1, "abcd");
+	        byte[] encoding = encoder.encode(msg1);
+	        
+			String res = ByteUtil.convertByteArrayToBitString(encoding);
+			assertEquals("11100000 11110001 01100001 01100010 01100011 11100100", res);
+
+	}
+	
 
 }
