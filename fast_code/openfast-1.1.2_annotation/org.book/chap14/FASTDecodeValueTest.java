@@ -152,17 +152,49 @@ public class FASTDecodeValueTest extends OpenFastTestCase {
 //		
 //	}
 	
-	public void testDeltaValue()
+//	public void testDeltaValue()
+//	{
+//		MessageTemplate template1 = new MessageTemplate("",
+//				new Field[] { new Scalar("1", Type.U32, Operator.DELTA, new IntegerValue(10), true), });
+//		Context context = new Context();
+//
+//		context.registerTemplate(113, template1);
+//		FastEncoder encoder = new FastEncoder(context);
+//
+//		Message msg1 = new Message(template1);
+//		msg1.setInteger(1, 20);
+//		byte[] encoding = encoder.encode(msg1);
+//
+//		String res1 = ByteUtil.convertByteArrayToBitString(encoding);
+//		System.out.println("the res is:" + res1);
+//
+//
+//		InputStream in = ByteUtil.createByteStream(res1);
+//
+//		context.reset();
+//		FastDecoder decoder = new FastDecoder(context, in);
+//
+//		Message msg_t1 = decoder.readMessage();
+//
+//		System.out.println("the msg integer is: " + msg_t1.getInt(1));
+//		
+//		
+//		
+//	}
+	
+	
+	public void testTailValue()
 	{
 		MessageTemplate template1 = new MessageTemplate("",
-				new Field[] { new Scalar("1", Type.U32, Operator.DELTA, new IntegerValue(10), false), });
+				new Field[] { new Scalar("1", Type.U32, Operator.INCREMENT, new IntegerValue(10), true), });
 		Context context = new Context();
 
 		context.registerTemplate(113, template1);
 		FastEncoder encoder = new FastEncoder(context);
 
 		Message msg1 = new Message(template1);
-		msg1.setInteger(1, 20);
+
+		msg1.setInteger(1, 10);
 		byte[] encoding = encoder.encode(msg1);
 
 		String res1 = ByteUtil.convertByteArrayToBitString(encoding);
@@ -175,12 +207,11 @@ public class FASTDecodeValueTest extends OpenFastTestCase {
 		FastDecoder decoder = new FastDecoder(context, in);
 
 		Message msg_t1 = decoder.readMessage();
-
+		
 		System.out.println("the msg integer is: " + msg_t1.getInt(1));
 		
 		
 		
 	}
-	
 	
 }
