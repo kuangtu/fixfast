@@ -41,6 +41,7 @@ public class ByteUtil {
         String[] bitStrings = bitString.split(" ");
         byte[] bytes = new byte[bitStrings.length];
         for (int i = 0; i < bitStrings.length; i++) {
+        	//基于二进制转为字节
             bytes[i] = (byte) Integer.parseInt(bitStrings[i], 2);
         }
         return bytes;
@@ -81,12 +82,15 @@ public class ByteUtil {
     }
 
     public static String convertByteArrayToBitString(byte[] bytes, int length) {
+    	//字节长度为0，直接返回""
         if (bytes.length == 0) {
             return "";
         }
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
+        	//将字节整数转为2进制格式
             String bits = Integer.toString(bytes[i] & 0xFF, 2);
+            //不足8bit，前面补0
             for (int j = 0; j < (8 - bits.length()); j++)
                 builder.append('0');
             builder.append(bits).append(' ');
