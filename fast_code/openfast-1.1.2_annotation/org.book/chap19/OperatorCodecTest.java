@@ -158,5 +158,16 @@ public class OperatorCodecTest extends OpenFastTestCase {
 		assertEquals(ScalarValue.NULL, field.getOperatorCodec().getValueToEncode(null, new IntegerValue(10), field));
 	}
 	
+	
+	public void testTailValueCode() {
+		Scalar field = new Scalar("", Type.ASCII, Operator.TAIL, new StringValue("abce"), true);
+		
+		// 前值未定义，取字段初始值abce，字段值为abcd，结果为d
+		assertEquals(new StringValue("d"), field.getOperatorCodec().getValueToEncode(new StringValue("abcd"), ScalarValue.UNDEFINED, field));
+				
+		//前值未定义，字段值为null,通过NULL表示
+		assertEquals(ScalarValue.NULL, field.getOperatorCodec().getValueToEncode(null, ScalarValue.UNDEFINED, field));
+	}
+	
 
 }
