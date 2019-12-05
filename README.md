@@ -31,3 +31,5 @@
 - [FIX8](https://www.fix8.org/) 高性能C++ FIX框架
 - [onixs](https://www.onixs.biz/) 低延迟FIX引擎产品
 
+- [fix-fast-tutorial](http://jettekfix.com/education/fix-fast-tutorial/) **强烈推荐**
+
