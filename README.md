@@ -33,3 +33,8 @@
 
 - [fix-fast-tutorial](http://jettekfix.com/education/fix-fast-tutorial/) **强烈推荐**
 
+# 重点内容
+## 解析逻辑
+各操作符解析逻辑，可以参照下图：
+
+![解析逻辑](.pic/fieldOperatorsCheatSheet.png)
