@@ -37,4 +37,4 @@
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
 
-![解析逻辑](.pic/fieldOperatorsCheatSheet.png)
+![解析逻辑](pic/fieldOperatorsCheatSheet.png)
