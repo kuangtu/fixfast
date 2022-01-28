@@ -30,8 +30,9 @@
 - [Philadelphia ](<https://github.com/paritytrading/philadelphia>) 基于JVM的低延迟FIX引擎
 - [FIX8](https://www.fix8.org/) 高性能C++ FIX框架
 - [onixs](https://www.onixs.biz/) 低延迟FIX引擎产品
-
 - [fix-fast-tutorial](http://jettekfix.com/education/fix-fast-tutorial/) **强烈推荐**
+- [gotrade](https://github.com/cyanly/gotrade) golang语言的fix 协议，属于POC阶段，目前还不能用于生产
+- [fasters](https://lib.rs/crates/fasters) 基于纯Rust的fix引擎
 
 # 重点内容
 ## 解析逻辑
