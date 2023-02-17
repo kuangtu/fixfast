@@ -33,10 +33,12 @@
 - [fix-fast-tutorial](http://jettekfix.com/education/fix-fast-tutorial/) **强烈推荐**
 - [gotrade](https://github.com/cyanly/gotrade) golang语言的fix 协议，属于POC阶段，目前还不能用于生产
 - [fasters](https://lib.rs/crates/fasters) 基于纯Rust的fix引擎
+- [quickfixengine](https://quickfixengine.org/) fix引擎开源网站
 - [quickfix](https://github.com/quickfix/quickfix) fix C++库
 - [quickfixgo](https://github.com/quickfixgo/quickfix) fix Go库
+- [quickfixn](https://github.com/connamara/quickfixn) fix NET库
 - [goFAST](https://github.com/co11ter/goFAST) FAST Go库，看起来还不够完善，delta等操作符是TODO List
-
+- [QuickFIX Python Samples](https://github.com/rinleit/quickfix-python-samples) QuickFIX  Python示例
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
