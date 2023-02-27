@@ -39,6 +39,7 @@
 - [quickfixn](https://github.com/connamara/quickfixn) fix NET库
 - [goFAST](https://github.com/co11ter/goFAST) FAST Go库，看起来还不够完善，delta等操作符是TODO List
 - [QuickFIX Python Samples](https://github.com/rinleit/quickfix-python-samples) QuickFIX  Python示例
+- [Financial Information eXchange protocol implemented in Rust](https://ferrumfix.org/) FIX Rust实现
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
