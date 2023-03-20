@@ -40,6 +40,10 @@
 - [goFAST](https://github.com/co11ter/goFAST) FAST Go库，看起来还不够完善，delta等操作符是TODO List
 - [QuickFIX Python Samples](https://github.com/rinleit/quickfix-python-samples) QuickFIX  Python示例
 - [Financial Information eXchange protocol implemented in Rust](https://ferrumfix.org/) FIX Rust实现
+- [fixio](https://github.com/kpavlov/fixio) FIX Protocol Support for Netty
+- [simplefix](https://github.com/da4089/simplefix) Simple FIX protocol implementation for Python
+- [fixjs](https://github.com/defunctzombie/fixjs) Financial Information Exchange protocol in javascript
+- [fix2json](https://github.com/SunGard-Labs/fix2json)A command-line utility to present FIX protocol messages as JSON or YAML
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
