@@ -44,6 +44,7 @@
 - [simplefix](https://github.com/da4089/simplefix) Simple FIX protocol implementation for Python
 - [fixjs](https://github.com/defunctzombie/fixjs) Financial Information Exchange protocol in javascript
 - [fix2json](https://github.com/SunGard-Labs/fix2json)A command-line utility to present FIX protocol messages as JSON or YAML
+- [hffix](https://github.com/jamesdbrock/hffix) Financial Information Exchange Protocol C++ Library 基于头文件的FIX库
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
