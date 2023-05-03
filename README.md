@@ -45,6 +45,8 @@
 - [fixjs](https://github.com/defunctzombie/fixjs) Financial Information Exchange protocol in javascript
 - [fix2json](https://github.com/SunGard-Labs/fix2json)A command-line utility to present FIX protocol messages as JSON or YAML
 - [hffix](https://github.com/jamesdbrock/hffix) Financial Information Exchange Protocol C++ Library 基于头文件的FIX库
+- [API信息](https://help.cqg.com/apihelp/index.html#!Documents/welcometoapihelp1.htm) API客户端调用说明，部分FIX、FAST内容阐述比较细致
+- [通过硬件加速FIX/FAST协议解析](http://www.cs.columbia.edu/~sedwards/classes/2013/4840/reports/FIX-FAST.pdf) 
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
