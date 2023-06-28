@@ -48,6 +48,7 @@
 - [API信息](https://help.cqg.com/apihelp/index.html#!Documents/welcometoapihelp1.htm) API客户端调用说明，部分FIX、FAST内容阐述比较细致
 - [通过硬件加速FIX/FAST协议解析](http://www.cs.columbia.edu/~sedwards/classes/2013/4840/reports/FIX-FAST.pdf) 
 - [Artio](https://github.com/real-logic/artio)   - Resilient High-Performance FIX and FIXP Gateway
+- [erlang_fast](https://github.com/dmitryme/erlang_fast) FIX/FAST decode/encode facility
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
