@@ -50,7 +50,7 @@
 - [Artio](https://github.com/real-logic/artio)   - Resilient High-Performance FIX and FIXP Gateway
 - [erlang_fast](https://github.com/dmitryme/erlang_fast) FIX/FAST decode/encode facility
 - [fix-rs](https://github.com/jbendig/fix-rs)fix-rs is a FIX (Financial Information Exchange) engine written in Rust.
-
+- [pyfixmsg ](https://github.com/morganstanley/pyfixmsg) pyfixmsg is a library for parsing, manipulating and serialising FIX messages, primarily geared towards testing
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
