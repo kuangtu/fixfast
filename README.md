@@ -51,6 +51,7 @@
 - [erlang_fast](https://github.com/dmitryme/erlang_fast) FIX/FAST decode/encode facility
 - [fix-rs](https://github.com/jbendig/fix-rs)fix-rs is a FIX (Financial Information Exchange) engine written in Rust.
 - [pyfixmsg ](https://github.com/morganstanley/pyfixmsg) pyfixmsg is a library for parsing, manipulating and serialising FIX messages, primarily geared towards testing
+- [Spring Boot Starter for QuickFIX/J](https://github.com/esanchezros/quickfixj-spring-boot-starter) This project is a Spring Boot Starter for QuickFIX/J messaging engine for the FIX protocol. It simplifies the configuration required to create and start an Initiator or Acceptor, and handles the lifecycle of the Connector.
 # 重点内容
 ## 解析逻辑
 各操作符解析逻辑，可以参照下图：
